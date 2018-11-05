@@ -17,5 +17,10 @@ namespace Client
 
             factory = this.CreateChannel();
         }
+
+        public void CreateFolder(string foldername)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
