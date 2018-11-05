@@ -10,7 +10,17 @@ namespace Service
     {
         static void Main(string[] args)
         {
-            //lala
+
+            Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode");
+            string mode = Console.ReadLine();
+
+            HostProtection hostProtection = new HostProtection(mode);
+
+            hostProtection.Open();
+
+            hostProtection.Close();
+
+
         }
     }
 }
