@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{BD7B1A90-9C5B-4C21-8887-0C98A1E7684B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{BD7B1A90-9C5B-4C21-8887-0C98A1E7684B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,13 @@ Global
 		{6E2CA4FB-EEA1-49FA-88EF-9BD22160421B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E2CA4FB-EEA1-49FA-88EF-9BD22160421B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E2CA4FB-EEA1-49FA-88EF-9BD22160421B}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+=======
+		{A4934FAB-A9A8-4679-B94D-D90E8395992E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4934FAB-A9A8-4679-B94D-D90E8395992E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4934FAB-A9A8-4679-B94D-D90E8395992E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4934FAB-A9A8-4679-B94D-D90E8395992E}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 7b561669fb829f700b00d4baad329547599f18fd
 		{BD7B1A90-9C5B-4C21-8887-0C98A1E7684B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD7B1A90-9C5B-4C21-8887-0C98A1E7684B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7B1A90-9C5B-4C21-8887-0C98A1E7684B}.Release|Any CPU.ActiveCfg = Release|Any CPU
