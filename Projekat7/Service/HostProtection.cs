@@ -24,15 +24,18 @@ namespace Service
                 binding.Security.Mode = SecurityMode.Transport;
                 binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+                Console.WriteLine("TRANSPORT");
             }
             else if (mode.Equals("m"))
             {
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
+                Console.WriteLine("MESSAGE");
+
             }
 
 
-            string address = "net.tcp://localhost:9999/WCFService";
+            string address = "net.tcp://localhost:9999/FileService";
             
 
             host = new ServiceHost(typeof(FileService));

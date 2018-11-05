@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,17 @@ namespace Client
 
         public void CreateFolder(string foldername)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.CreateFolder(foldername);
+                Console.WriteLine("CreateFolder() allowed");
+
+            }
+            catch (SecurityAccessDeniedException secEx)
+            {
+                Console.WriteLine("Error while trying to CreateFolder(). {0}", secEx.Message);
+
+            }
         }
     }
 }

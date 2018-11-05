@@ -11,7 +11,7 @@ namespace Service
     {
         public void CreateFolder(string foldername)
         {
-            Console.WriteLine("Method Create Folder called");
+            Console.WriteLine("Method Create Folder called {0}",foldername);
         }
     }
 }
