@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    interface IFileService
+   public interface IFileService
     {
     }
 }

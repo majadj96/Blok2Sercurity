@@ -10,7 +10,7 @@ namespace Service
     {
         static void Main(string[] args)
         {
-            //lala
+            
         }
     }
 }
