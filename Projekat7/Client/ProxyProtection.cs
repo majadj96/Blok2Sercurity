@@ -27,9 +27,9 @@ namespace Client
                 Console.WriteLine("CreateFolder() allowed");
 
             }
-            catch (SecurityAccessDeniedException secEx)
+            catch (CommunicationException comEx)
             {
-                Console.WriteLine("Error while trying to CreateFolder(). {0}", secEx.Message);
+                Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
 
             }
         }
