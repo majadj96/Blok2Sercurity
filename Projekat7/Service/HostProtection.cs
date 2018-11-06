@@ -1,6 +1,8 @@
 ﻿using Common;
+using SecurityManager;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Policy;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -42,12 +44,12 @@ namespace Service
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
 
-            //host.Authorization.ServiceAuthorizationManager = new MyAuthorizationManager();
+            host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
 
-            //List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
-            //policies.Add(new CustomAuthorizationPolicy());
-            //host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
-            //host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
+            List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
+            policies.Add(new CustomAuthorizationPolicy());
+            host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
+            host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
         }
 

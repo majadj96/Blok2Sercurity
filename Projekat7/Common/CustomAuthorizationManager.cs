@@ -5,6 +5,7 @@ using System.Text;
 using System.ServiceModel;
 using System.Security.Principal;
 using System.Threading;
+using Common;
 
 namespace SecurityManager
 {
@@ -14,7 +15,7 @@ namespace SecurityManager
 		{
 			bool authorized = false;
 
-			IPrincipal principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as IPrincipal;
+			IPrincipal principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as CustomPrincipal;
 			
 			string group = string.Format("{0}\\Viewer", Environment.MachineName);
 

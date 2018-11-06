@@ -63,9 +63,9 @@ namespace Common {
         /// <summary>
         ///   Looks up a localized string similar to Administrate,Read,Edit,Access.
         /// </summary>
-        internal static string Administrator {
+        internal static string Administrator2 {
             get {
-                return ResourceManager.GetString("Administrator", resourceCulture);
+                return ResourceManager.GetString("Administrator2", resourceCulture);
             }
         }
         

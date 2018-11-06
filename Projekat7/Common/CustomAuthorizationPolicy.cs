@@ -48,18 +48,34 @@ namespace SecurityManager
 			return true;
 		}
 
-		protected virtual IPrincipal GetPrincipal(IIdentity identity)
+        private static CustomPrincipal customPrincipalInstance;
+        private static WindowsIdentity windowsIdentity;
+
+        public static CustomPrincipal CustomPrincipalInstance
+        {
+            get
+            {
+                if (customPrincipalInstance == null)
+                {
+                    customPrincipalInstance = new CustomPrincipal(windowsIdentity);
+                }
+                return customPrincipalInstance;
+            }
+        }
+
+        protected virtual IPrincipal GetPrincipal(IIdentity identity)
 		{
 			lock (locker)
 			{
 				IPrincipal principal = null;
-				WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+                windowsIdentity = identity as WindowsIdentity;
 
 				if (windowsIdentity != null)
 				{
-					//Audit.AuthenticationSuccess(windowsIdentity.Name);
-					principal = new CustomPrincipal(windowsIdentity);	
-				}
+                    //Audit.AuthenticationSuccess(windowsIdentity.Name);
+                    principal = CustomPrincipalInstance;
+
+                }
 
 				return principal;
 			}

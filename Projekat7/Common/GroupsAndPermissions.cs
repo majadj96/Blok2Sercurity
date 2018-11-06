@@ -1,40 +1,28 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
     public class GroupsAndPermissions
     {
-        public static Dictionary<string, List<string>> GroupsAndPermissionsDict;
+        public static Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
         public GroupsAndPermissions()
         {
-            ResourceManager rm = new ResourceManager("Common.GroupsAndPermisions",Assembly.GetExecutingAssembly());
-
-            string listaPermisijaReader = rm.GetString("Reader");
-            string[] splitReader = listaPermisijaReader.Split(',');
-            List<string> listaReader =  splitReader.ToList();
-
-            string listaPermisijaModifier = rm.GetString("Modifier");
-            string[] splitModifier = listaPermisijaModifier.Split(',');
-            List<string> listaModifier = splitModifier.ToList();
-
-            string listaPermisijaAdministrator = rm.GetString("Administrator");
-            string[] splitAdministrator = listaPermisijaAdministrator.Split(',');
-            List<string> listaAdministrator = splitAdministrator.ToList();
-
-            GroupsAndPermissionsDict = new Dictionary<string, List<string>>
+          
+           ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            foreach (DictionaryEntry d in rsxr)
             {
-                { "Reader", listaReader },
-                { "Modifier", listaModifier },
-                { "Administrator", listaAdministrator },
+                string name = d.Key.ToString();
+                string value = d.Value.ToString();
+                string[] split = value.Split(',');
+                List<string> listaPermisija = split.ToList();
+                GroupsAndPermissionsDict.Add(name, listaPermisija);
+            }
 
-                };
+            
         }
 
         public List<string> GetPermissions(string group)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Service
     {
         static void Main(string[] args)
         {
+            //GroupsAndPermissions gp = new GroupsAndPermissions();
 
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode");
             string mode = Console.ReadLine();
