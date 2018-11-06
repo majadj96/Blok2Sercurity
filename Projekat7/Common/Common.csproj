@@ -54,6 +54,7 @@
     <Compile Include="GroupsAndPermissions.cs" />
     <Compile Include="IFileService.cs" />
     <Compile Include="IRBACChange.cs" />
+    <Compile Include="IUpdateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
