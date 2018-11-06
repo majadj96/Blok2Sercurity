@@ -25,6 +25,8 @@ namespace AutorizationManagerForRBAC
 
             Console.WriteLine("I'm ready for changes 8-)");
 
+
+
             Console.ReadLine();
             host.Close();
 
