@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertManager.cs" />
     <Compile Include="CustomAuthorizationManager.cs" />
     <Compile Include="CustomAuthorizationPolicy.cs" />
     <Compile Include="CustomPrincipal.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="IRBACChange.cs" />
     <Compile Include="IUpdateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceCertValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GroupsAndPermisions.resx">
