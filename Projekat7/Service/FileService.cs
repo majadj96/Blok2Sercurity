@@ -19,7 +19,11 @@ namespace Service
         {
             IPrincipal principal = Thread.CurrentPrincipal;
             if (principal.IsInRole("Read"))
+            {
                 File.Create(fileName);
+                Console.WriteLine("Fajl je kreiran sa imenom {0}", fileName);
+                
+            }
             else
             {
                 //loger
@@ -39,6 +43,7 @@ namespace Service
             if (principal.IsInRole("Administrate"))
             {
               System.IO.Directory.CreateDirectory(foldername);
+                Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
             }
             else
             {
@@ -58,6 +63,7 @@ namespace Service
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
+                    Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
                 }
                 else
                 {
@@ -79,6 +85,11 @@ namespace Service
         {
             IPrincipal principal = Thread.CurrentPrincipal;
             var dir = new DirectoryInfo(folderName);
+            if (dir != null)
+            {
+                dir.Delete(true);
+                Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
+            }
 
         }
 
@@ -92,7 +103,7 @@ namespace Service
                 Console.WriteLine("Unesite dodatak fajlu:");
                 string tekst = Console.ReadLine();
                 File.AppendAllText(FileName,tekst);
-               
+                Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
             }
             else
             {
@@ -108,6 +119,7 @@ namespace Service
             if (principal.IsInRole("Edit"))
             {
                 Directory.Move(folderName, newName);
+                Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName,newName);
             }
             else
             {
@@ -124,6 +136,7 @@ namespace Service
             if (principal.IsInRole("Read")) {
                 
                 string readText = File.ReadAllText(fileName);
+                Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
                 Console.WriteLine(readText);
             }
             else
