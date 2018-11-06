@@ -45,6 +45,7 @@
     <Compile Include="CustomAuthorizationManager.cs" />
     <Compile Include="CustomAuthorizationPolicy.cs" />
     <Compile Include="CustomPrincipal.cs" />
+    <Compile Include="Formatter.cs" />
     <Compile Include="GroupsAndPermisions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
