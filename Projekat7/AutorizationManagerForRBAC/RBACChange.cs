@@ -15,15 +15,21 @@ namespace AutorizationManagerForRBAC
     {
         public void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict)
         {
-            IResourceWriter writer = new ResourceWriter("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            ResXResourceWriter writer = new ResXResourceWriter("..\\..\\..\\Common\\GroupsAndPermisions.resx");
 
+            string permisije = string.Empty;
             foreach(string grupa in GroupsAndPermissionsDict.Keys)
             {
+
                 foreach(string permisija in GroupsAndPermissionsDict[grupa])
                 {
-                    writer.AddResource(grupa, permisija);
+                    permisije += permisija + ",";
 
                 }
+                permisije = permisije.Substring(0, permisije.Length - 1);
+                writer.AddResource(grupa, permisije);
+                permisije = string.Empty;
+
 
             }
 
