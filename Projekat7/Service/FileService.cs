@@ -13,31 +13,37 @@ namespace Service
 {
     class FileService : IFileService
     {
-        IPrincipal principal = Thread.CurrentPrincipal;
+        
 
         public void CreateFile(string fileName)
         {
+            IPrincipal principal = Thread.CurrentPrincipal;
             if (principal.IsInRole("Read"))
+            {
                 File.Create(fileName);
+                Console.WriteLine("Fajl je kreiran sa imenom {0}", fileName);
+                
+            }
             else
             {
                 //loger
                 SecurityException se = new SecurityException();
                 Console.WriteLine("This user dont have permission", se.Message);
             }
-            
+          //string user = System.IO.File.GetAccessControl(fileName).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
+
+
         }
 
-        public void CreateFile()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void CreateFolder(string foldername)
         {
+            IPrincipal principal = Thread.CurrentPrincipal;
             if (principal.IsInRole("Administrate"))
             {
               System.IO.Directory.CreateDirectory(foldername);
+                Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
             }
             else
             {
@@ -51,11 +57,13 @@ namespace Service
 
         public void DeleteFile(string fileName)
         {
+            IPrincipal principal = Thread.CurrentPrincipal;
             if (principal.IsInRole("Administrate"))
             {
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
+                    Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
                 }
                 else
                 {
@@ -71,33 +79,47 @@ namespace Service
             }
         }
 
-        public void DeleteFile()
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public void DeleteFolder(string folderName)
         {
-
+            IPrincipal principal = Thread.CurrentPrincipal;
             var dir = new DirectoryInfo(folderName);
+            if (dir != null)
+            {
+                dir.Delete(true);
+                Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
+            }
 
         }
 
-        public void DeleteFolder()
+        public void ModifyFile(string FileName)
         {
-            throw new NotImplementedException();
-        }
+            IPrincipal principal = Thread.CurrentPrincipal;
+            string user = System.IO.File.GetAccessControl(FileName).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
 
-        public void ModifyFile()
-        {
-            throw new NotImplementedException();
+            if (principal.IsInRole("Edit"))
+            {
+                Console.WriteLine("Unesite dodatak fajlu:");
+                string tekst = Console.ReadLine();
+                File.AppendAllText(FileName,tekst);
+                Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
+            }
+            else
+            {
+                //loger
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+            }
         }
 
         public void ModifyFolderName(string folderName,string newName)
         {
+            IPrincipal principal = Thread.CurrentPrincipal;
             if (principal.IsInRole("Edit"))
             {
                 Directory.Move(folderName, newName);
+                Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName,newName);
             }
             else
             {
@@ -108,14 +130,21 @@ namespace Service
             }
         }
 
-        public void ModifyFolderName()
+        public void Read(string fileName)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Read()
-        {
-            throw new NotImplementedException();
+            IPrincipal principal = Thread.CurrentPrincipal;
+            if (principal.IsInRole("Read")) {
+                
+                string readText = File.ReadAllText(fileName);
+                Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
+                Console.WriteLine(readText);
+            }
+            else
+            {
+                //loger
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+            }
         }
     }
 }

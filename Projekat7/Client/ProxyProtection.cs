@@ -19,11 +19,6 @@ namespace Client
             factory = this.CreateChannel();
         }
 
-        public void CreateFile()
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateFolder(string foldername)
         {
             try
@@ -38,29 +33,88 @@ namespace Client
             }
         }
 
-        public void DeleteFile()
+        public void CreateFile(string filename)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.CreateFile(filename);
+                Console.WriteLine("CreateFile() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
+            }
         }
 
-        public void DeleteFolder()
+        public void ModifyFolderName(string folderName, string newName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.ModifyFolderName(folderName,newName);
+                Console.WriteLine("ModifyFolderName() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to ModifyFolderName(). {0}", comEx.Message);
+            }
         }
 
-        public void ModifyFile()
+        public void ModifyFile(string FileName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.ModifyFile(FileName);
+                Console.WriteLine("ModifyFile() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to ModifyFile(). {0}", comEx.Message);
+            }
         }
 
-        public void ModifyFolderName()
+        public void Read(string FileName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.Read(FileName);
+                Console.WriteLine("Read() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to Read(). {0}", comEx.Message);
+            }
         }
 
-        public void Read()
+        public void DeleteFolder(string folderName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                factory.DeleteFolder(folderName);
+                Console.WriteLine("DeleteFolder() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to DeleteFolder(). {0}", comEx.Message);
+            }
+        }
+
+        public void DeleteFile(string fileName)
+        {
+            try
+            {
+                factory.DeleteFile(fileName);
+                Console.WriteLine("DeleteFile() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to DeleteFile(). {0}", comEx.Message);
+            }
         }
     }
 }

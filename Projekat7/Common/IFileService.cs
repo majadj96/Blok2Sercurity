@@ -14,21 +14,21 @@ namespace Common
         void CreateFolder(string foldername);
 
         [OperationContract]
-        void CreateFile();
+        void CreateFile(string fileName);
 
         [OperationContract]
-        void ModifyFolderName();
+        void ModifyFolderName(string folderName, string newName);
 
         [OperationContract]
-        void ModifyFile();
+        void ModifyFile(string FileName);
 
         [OperationContract]
-        void Read();
+        void Read(string FileName);
 
         [OperationContract]
-        void DeleteFolder();
+        void DeleteFolder(string folderName);
 
         [OperationContract]
-        void DeleteFile();
+        void DeleteFile(string fileName);
     }
 }
