@@ -5,6 +5,7 @@ using System.Text;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Claims;
 using System.Security.Principal;
+using Common;
 
 namespace SecurityManager
 {
@@ -57,7 +58,7 @@ namespace SecurityManager
 				if (windowsIdentity != null)
 				{
 					//Audit.AuthenticationSuccess(windowsIdentity.Name);
-					//principal = new CustomPrincipal(windowsIdentity);	
+					principal = new CustomPrincipal(windowsIdentity);	
 				}
 
 				return principal;

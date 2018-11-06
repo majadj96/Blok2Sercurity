@@ -18,7 +18,8 @@ namespace SecurityManager
 			
 			string group = string.Format("{0}\\Viewer", Environment.MachineName);
 
-			if (principal.IsInRole(group))//???
+
+			if (principal.IsInRole("Access"))
 			{
 				return true;
 			}

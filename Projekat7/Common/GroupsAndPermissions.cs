@@ -11,7 +11,7 @@ namespace Common
 {
     public class GroupsAndPermissions
     {
-        public static Dictionary<string, List<string>> dictionary;
+        public static Dictionary<string, List<string>> GroupsAndPermissionsDict;
         public GroupsAndPermissions()
         {
             ResourceManager rm = new ResourceManager("Common.GroupsAndPermisions",Assembly.GetExecutingAssembly());
@@ -28,7 +28,7 @@ namespace Common
             string[] splitAdministrator = listaPermisijaAdministrator.Split(',');
             List<string> listaAdministrator = splitAdministrator.ToList();
 
-            dictionary = new Dictionary<string, List<string>>
+            GroupsAndPermissionsDict = new Dictionary<string, List<string>>
             {
                 { "Reader", listaReader },
                 { "Modifier", listaModifier },
@@ -39,7 +39,7 @@ namespace Common
 
         public List<string> GetPermissions(string group)
         {
-            dictionary.TryGetValue(group, out List<string> retList);
+            GroupsAndPermissionsDict.TryGetValue(group, out List<string> retList);
             return retList;
         }
     }
