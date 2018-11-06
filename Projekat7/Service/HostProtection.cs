@@ -31,13 +31,10 @@ namespace Service
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
                 Console.WriteLine("MESSAGE");
-
             }
-
-
+            
             string address = "net.tcp://localhost:9999/FileService";
             
-
             host = new ServiceHost(typeof(FileService));
             host.AddServiceEndpoint(typeof(IFileService), binding, address);
 
@@ -51,10 +48,6 @@ namespace Service
             //policies.Add(new CustomAuthorizationPolicy());
             //host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
             //host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
-        
-
-
-
 
         }
 
