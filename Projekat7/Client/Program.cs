@@ -40,7 +40,7 @@ namespace Client
             using (ProxyProtection proxy = new ProxyProtection(binding, address))
             {
                 proxy.CreateFolder("lala");
-
+                proxy.CreateFile("fajl");
                 Console.ReadLine();
             }
 
