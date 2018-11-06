@@ -11,7 +11,7 @@ namespace Common
     public interface IRBACChange
     {
         [OperationContract]
-        void Change();
+        void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict);
 
     }
 }

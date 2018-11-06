@@ -19,6 +19,11 @@ namespace Client
             factory = this.CreateChannel();
         }
 
+        public void CreateFile()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateFolder(string foldername)
         {
             try
@@ -31,6 +36,31 @@ namespace Client
             {
                 Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
             }
+        }
+
+        public void DeleteFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteFolder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifyFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifyFolderName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
         }
     }
 }

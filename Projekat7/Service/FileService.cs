@@ -28,7 +28,10 @@ namespace Service
             
         }
 
-     
+        public void CreateFile()
+        {
+            throw new NotImplementedException();
+        }
 
         public void CreateFolder(string foldername)
         {
@@ -68,13 +71,21 @@ namespace Service
             }
         }
 
-     
+        public void DeleteFile()
+        {
+            throw new NotImplementedException();
+        }
 
         public void DeleteFolder(string folderName)
         {
 
             var dir = new DirectoryInfo(folderName);
 
+        }
+
+        public void DeleteFolder()
+        {
+            throw new NotImplementedException();
         }
 
         public void ModifyFile()
@@ -95,6 +106,11 @@ namespace Service
                 Console.WriteLine("This user dont have permission", se.Message);
 
             }
+        }
+
+        public void ModifyFolderName()
+        {
+            throw new NotImplementedException();
         }
 
         public void Read()
