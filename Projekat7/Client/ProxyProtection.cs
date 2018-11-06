@@ -30,7 +30,6 @@ namespace Client
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
-
             }
         }
     }
