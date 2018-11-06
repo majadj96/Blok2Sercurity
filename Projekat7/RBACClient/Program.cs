@@ -12,7 +12,7 @@ namespace RBACClient
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9999/RBACChange";
+            string address = "net.tcp://localhost:9998/RBACChange";
 
             using (MakeProxy proxy = new MakeProxy(binding, address))
             {
