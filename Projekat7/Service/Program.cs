@@ -1,6 +1,9 @@
-﻿using System;
+﻿using SecurityManager;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Policy;
 using System.Linq;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +20,8 @@ namespace Service
             HostProtection hostProtection = new HostProtection(mode);
 
             hostProtection.Open();
+
+
 
             hostProtection.Close();
 

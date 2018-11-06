@@ -12,5 +12,23 @@ namespace Common
     {
         [OperationContract]
         void CreateFolder(string foldername);
+
+        [OperationContract]
+        void CreateFile();
+
+        [OperationContract]
+        void ModifyFolderName();
+
+        [OperationContract]
+        void ModifyFile();
+
+        [OperationContract]
+        void Read();
+
+        [OperationContract]
+        void DeleteFolder();
+
+        [OperationContract]
+        void DeleteFile();
     }
 }
