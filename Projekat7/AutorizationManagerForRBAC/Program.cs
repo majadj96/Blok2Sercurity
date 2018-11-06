@@ -10,6 +10,7 @@ namespace AutorizationManagerForRBAC
     {
         static void Main(string[] args)
         {
+            //RBAC
         }
     }
 }
