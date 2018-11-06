@@ -26,13 +26,11 @@ namespace Service
                 binding.Security.Mode = SecurityMode.Transport;
                 binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                Console.WriteLine("TRANSPORT");
             }
             else if (mode.Equals("m"))
             {
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
-                Console.WriteLine("MESSAGE");
             }
             
             string address = "net.tcp://localhost:9999/FileService";
@@ -54,10 +52,16 @@ namespace Service
         }
 
 
-        public void Open()
+        public void Open(string mode)
         {
+            string line = string.Empty;
+
             host.Open();
-            Console.WriteLine("WCFService is opened. Press <enter> to finish...");
+            if (mode.Equals("t"))
+                Console.WriteLine("Service (Transport Mode) is opened.");
+            else if(mode.Equals("m"))
+                Console.WriteLine("Service (Message Mode) is opened.");
+
             Console.ReadLine();
         }
 
