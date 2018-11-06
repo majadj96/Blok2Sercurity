@@ -26,13 +26,11 @@ namespace Service
                 binding.Security.Mode = SecurityMode.Transport;
                 binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                Console.WriteLine("TRANSPORT");
             }
             else if (mode.Equals("m"))
             {
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
-                Console.WriteLine("MESSAGE");
             }
             
             string address = "net.tcp://localhost:9999/FileService";
@@ -44,22 +42,26 @@ namespace Service
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
 
-      
-
-        }
-
-
-        public void Open()
-        {
-            host.Open();
-
             host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
+
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
             policies.Add(new CustomAuthorizationPolicy());
             host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
             host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
-            Console.WriteLine("WCFService is opened. Press <enter> to finish...");
+        }
+
+
+        public void Open(string mode)
+        {
+            string line = string.Empty;
+
+            host.Open();
+            if (mode.Equals("t"))
+                Console.WriteLine("Service (Transport Mode) is opened.");
+            else if(mode.Equals("m"))
+                Console.WriteLine("Service (Message Mode) is opened.");
+
             Console.ReadLine();
         }
 

@@ -17,16 +17,24 @@ namespace Common
         public CustomPrincipal(WindowsIdentity windowsIdentity)
         {
             this.windowsIdentity = windowsIdentity;
+            GroupsAndPermissions gp = new GroupsAndPermissions();
 
             //dodaj pewrmisije
             foreach (IdentityReference group in windowsIdentity.Groups)
             {
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
                 var name = sid.Translate(typeof(NTAccount));
+                string[] split = name.ToString().Split('\\');
+                string keyDict;
+                if (split.Count() > 1)
+                    keyDict = split[1];
+                else
+                    keyDict = " ";
 
-                if (GroupsAndPermissions.GroupsAndPermissionsDict.ContainsKey(name.ToString()))
+                
+                if (GroupsAndPermissions.GroupsAndPermissionsDict.ContainsKey(keyDict))
                 {
-                    List<string> perms = GroupsAndPermissions.GroupsAndPermissionsDict[name.ToString()];
+                    List<string> perms = GroupsAndPermissions.GroupsAndPermissionsDict[keyDict];
                     foreach(string perm in perms)
                     {
                         if (!permissions.Contains(perm))
