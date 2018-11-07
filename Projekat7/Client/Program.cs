@@ -39,11 +39,6 @@ namespace Client
 
             using (ProxyProtection proxy = new ProxyProtection(binding, address))
             {
-                Console.WriteLine("Unesite ime foldera:");
-                string imeFoldera = Console.ReadLine();
-                proxy.CreateFolder(imeFoldera);
-
-            
 
                 Console.WriteLine("*********MENI*********");
                 Console.WriteLine("1. Pravljenje foldera");
