@@ -13,6 +13,7 @@ namespace SecurityManager
 	{
 		private string id;
 		private object locker = new object();
+        public static bool ConfigurationUpdate = false;
 
 		public CustomAuthorizationPolicy()
 		{
@@ -55,9 +56,10 @@ namespace SecurityManager
         {
             get
             {
-                if (customPrincipalInstance == null)
+                if (customPrincipalInstance == null || ConfigurationUpdate)
                 {
                     customPrincipalInstance = new CustomPrincipal(windowsIdentity);
+                    ConfigurationUpdate = false;
                 }
                 return customPrincipalInstance;
             }

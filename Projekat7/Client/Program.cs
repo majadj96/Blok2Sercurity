@@ -39,9 +39,13 @@ namespace Client
 
             using (ProxyProtection proxy = new ProxyProtection(binding, address))
             {
-                proxy.CreateFolder("lala");
-
+                Console.WriteLine("Unesite ime foldera:");
+                string imeFoldera = Console.ReadLine();
+                proxy.CreateFolder(imeFoldera);
+                //proxy.CreateFile("fajl");
                 Console.ReadLine();
+
+                Console.WriteLine("");
             }
 
 

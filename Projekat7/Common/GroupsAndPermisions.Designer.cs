@@ -61,7 +61,7 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Administrate,Read,Edit,Access.
+        ///   Looks up a localized string similar to Read,Edit,Access,Administrate.
         /// </summary>
         internal static string Administrator2 {
             get {

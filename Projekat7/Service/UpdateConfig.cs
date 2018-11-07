@@ -11,6 +11,8 @@ namespace Service
     {
         public void UpdateConfiguration()
         {
+            Console.WriteLine("Apdejtovao sam se " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
+
             Console.WriteLine("Updated configuration");
         }
     }

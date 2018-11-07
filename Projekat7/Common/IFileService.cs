@@ -11,19 +11,19 @@ namespace Common
    public interface IFileService
     {
         [OperationContract]
-        void CreateFolder(string folderName);
+        void CreateFolder(string foldername);
 
         [OperationContract]
         void CreateFile(string fileName);
 
         [OperationContract]
-        void ModifyFolderName(string folderName,string newName);
+        void ModifyFolderName(string folderName, string newName);
 
         [OperationContract]
-        void ModifyFile();
+        void ModifyFile(string FileName);
 
         [OperationContract]
-        void Read();
+        void Read(string FileName);
 
         [OperationContract]
         void DeleteFolder(string folderName);

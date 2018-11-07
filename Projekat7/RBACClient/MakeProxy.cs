@@ -19,11 +19,13 @@ namespace RBACClient
                 factory = this.CreateChannel();
             }
 
-        public void Change()
+        
+
+        public void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict)
         {
             try
             {
-                factory.Change();
+                factory.Change(GroupsAndPermissionsDict);
                 Console.WriteLine("Change() allowed");
 
             }
@@ -32,8 +34,5 @@ namespace RBACClient
                 Console.WriteLine("Error while trying to Change(). {0}", comEx.Message);
             }
         }
-
-
-       
     }
 }
