@@ -1,5 +1,5 @@
 ﻿using Common;
-using SecurityManager;
+
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
@@ -57,11 +57,7 @@ namespace Service
             string line = string.Empty;
 
             host.Open();
-            if (mode.Equals("t"))
-                Console.WriteLine("Service (Transport Mode) is opened.");
-            else if(mode.Equals("m"))
-                Console.WriteLine("Service (Message Mode) is opened.");
-
+            Console.WriteLine("WCFService is opened. Press <enter> to finish...");
             Console.ReadLine();
         }
 
