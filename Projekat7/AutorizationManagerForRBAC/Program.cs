@@ -24,33 +24,7 @@ namespace AutorizationManagerForRBAC
             host.Open();
             Console.WriteLine("I'm ready for changes 8-)");
 
-
-
-
-            string srvCertCN = "SysLog";
-            NetTcpBinding binding1 = new NetTcpBinding();
-            binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
-            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
-
-            using (MakeSyslogClient proxy = new MakeSyslogClient(binding1, address1))
-            {
-                Console.WriteLine("Kazem serveru da se loguje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
-                proxy.Logging();
-
-            }
-
-
-
-
-
-
-
-
-
-
-
+           
             Console.ReadLine();
 
             host.Close();
