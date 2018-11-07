@@ -65,7 +65,7 @@ namespace Common
             }
         }
 
-        protected virtual IPrincipal GetPrincipal(IIdentity identity)
+        public virtual IPrincipal GetPrincipal(IIdentity identity)
 		{
 			lock (locker)
 			{
@@ -88,6 +88,8 @@ namespace Common
 				return principal;
 			}
 		}
+
+
 
 		
 	}

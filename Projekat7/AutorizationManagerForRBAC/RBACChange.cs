@@ -29,21 +29,14 @@ namespace AutorizationManagerForRBAC
                 permisije = permisije.Substring(0, permisije.Length - 1);
                 writer.AddResource(grupa, permisije);
                 permisije = string.Empty;
-
-
             }
 
             writer.Generate();
             writer.Close();
-
-
-
+            
 
             Console.WriteLine("Promena u RESX-u!");
             
-
-
-
 
             string srvCertCN = "Servis";
             NetTcpBinding binding1 = new NetTcpBinding();
@@ -58,12 +51,6 @@ namespace AutorizationManagerForRBAC
                 proxy.UpdateConfiguration();
 
             }
-
-
-
-
-
-
 
         }
 
