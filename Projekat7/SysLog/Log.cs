@@ -12,8 +12,8 @@ namespace SysLog
     {
 
         static EventLog newLog;
-        static string SourceName = "MyApp";
-        static string LogName = "LogMyApp";
+        static string SourceName = "SysLog";
+        static string LogName = "LogServis";
 
         static Log()
         {
@@ -24,9 +24,14 @@ namespace SysLog
             newLog = new EventLog(LogName, Environment.MachineName, SourceName);
         }
 
-        public void Logging(string methoodName)
+        public void Logging(string methodName, string userName)
         {
-            throw new NotImplementedException();
+            newLog.WriteEntry("Korisnik " + userName + " successfully accessed to " + methodName);
+        }
+
+        public void LoggingFail(string methodName, string userName, string reason)
+        {
+            newLog.WriteEntry("User " + userName + " failed to access " + methodName + ". Reason: " + reason);
         }
     }
 }

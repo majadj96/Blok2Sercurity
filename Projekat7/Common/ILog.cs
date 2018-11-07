@@ -11,8 +11,10 @@ namespace Common
     public interface ILog
     {
         [OperationContract]
-        void Logging(string methoodName);
+        void Logging(string methoodName,string userName);
 
+        [OperationContract]
+        void LoggingFail(string methodName, string userName,string reason);
 
 
     }
