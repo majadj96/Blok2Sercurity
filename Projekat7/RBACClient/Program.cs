@@ -105,6 +105,8 @@ namespace RBACClient
 
             using (MakeProxy proxy = new MakeProxy(binding, address))
             {
+
+             
                 proxy.Change(GroupsAndPermissionsDict);
                 Console.ReadLine();
             }
