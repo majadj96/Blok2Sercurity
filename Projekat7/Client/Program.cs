@@ -44,6 +44,8 @@ namespace Client
                 proxy.CreateFolder(imeFoldera);
                 //proxy.CreateFile("fajl");
                 Console.ReadLine();
+
+                Console.WriteLine("");
             }
 
 
