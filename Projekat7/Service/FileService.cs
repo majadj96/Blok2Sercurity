@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security;
 using System.Security.Principal;
-using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,8 +17,7 @@ namespace Service
 
         public void CreateFile(string fileName)
         {
-            OperationContext.Current.IncomingMessageHeaders
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
 

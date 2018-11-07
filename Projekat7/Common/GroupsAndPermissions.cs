@@ -11,8 +11,18 @@ namespace Common
         public static Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
         public GroupsAndPermissions()
         {
-          
-           ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            UpdatePermissions();
+        }
+
+        public List<string> GetPermissions(string group)
+        {
+            GroupsAndPermissionsDict.TryGetValue(group, out List<string> retList);
+            return retList;
+        }
+
+        public void UpdatePermissions()
+        {
+            ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
             foreach (DictionaryEntry d in rsxr)
             {
                 string name = d.Key.ToString();
@@ -21,14 +31,6 @@ namespace Common
                 List<string> listaPermisija = split.ToList();
                 GroupsAndPermissionsDict.Add(name, listaPermisija);
             }
-
-            
-        }
-
-        public List<string> GetPermissions(string group)
-        {
-            GroupsAndPermissionsDict.TryGetValue(group, out List<string> retList);
-            return retList;
         }
     }
 }

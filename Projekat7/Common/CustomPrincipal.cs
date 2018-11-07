@@ -10,13 +10,18 @@ namespace Common
 {
     public class CustomPrincipal : IPrincipal
     {
-        public IIdentity Identity { get { return windowsIdentity; } }
-        WindowsIdentity windowsIdentity;
+        public IIdentity Identity { get { return WindowsIdentity; } }
+        public WindowsIdentity WindowsIdentity;
         List<string> permissions = new List<string>();
 
         public CustomPrincipal(WindowsIdentity windowsIdentity)
         {
-            this.windowsIdentity = windowsIdentity;
+            WindowsIdentity = windowsIdentity;
+            UpdatePermissions(WindowsIdentity);
+        }
+
+        public void UpdatePermissions(WindowsIdentity windowsIdentity)
+        {
             GroupsAndPermissions gp = new GroupsAndPermissions();
 
             //dodaj pewrmisije
@@ -31,16 +36,16 @@ namespace Common
                 else
                     keyDict = " ";
 
-                
+
                 if (GroupsAndPermissions.GroupsAndPermissionsDict.ContainsKey(keyDict))
                 {
                     List<string> perms = GroupsAndPermissions.GroupsAndPermissionsDict[keyDict];
-                    foreach(string perm in perms)
+                    foreach (string perm in perms)
                     {
                         if (!permissions.Contains(perm))
                             permissions.Add(perm);
                     }
-                    
+
                 }
             }
         }

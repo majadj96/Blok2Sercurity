@@ -74,9 +74,15 @@ namespace Common
 
 				if (windowsIdentity != null)
 				{
+                    if (InMemoryCash.PrincipalDict.ContainsKey(windowsIdentity.User))
+                        principal = InMemoryCash.PrincipalDict[windowsIdentity.User];
+                    else
+                    {
+                        InMemoryCash.PrincipalDict.Add(windowsIdentity.User, new CustomPrincipal(windowsIdentity));
+                        principal = InMemoryCash.PrincipalDict[windowsIdentity.User];
+                    }
                     //Audit.AuthenticationSuccess(windowsIdentity.Name);
-                    principal = CustomPrincipalInstance;
-
+                    
                 }
 
 				return principal;
