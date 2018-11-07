@@ -43,6 +43,39 @@ namespace AutorizationManagerForRBAC
 
 
 
+
+
+            string srvCertCN1 = "Servis";
+            NetTcpBinding binding2 = new NetTcpBinding();
+            binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+
+            X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
+            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:50001/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            binding2.CloseTimeout = TimeSpan.MaxValue;
+
+            binding2.OpenTimeout = TimeSpan.MaxValue;
+
+            binding2.ReceiveTimeout = TimeSpan.MaxValue;
+
+            binding2.SendTimeout = TimeSpan.MaxValue;
+
+          
+
+
+            using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
+            {
+                try
+                {
+                    Console.WriteLine("Kazem serveru da se apdejtuje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
+                    proxy.UpdateConfiguration();
+                }catch
+                {
+
+                }
+
+            }
+
+
             string srvCertCN = "SysLog";
             NetTcpBinding binding1 = new NetTcpBinding();
             binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
@@ -53,27 +86,27 @@ namespace AutorizationManagerForRBAC
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Kazem serveru da se loguje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
             string usrname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            
 
 
+            binding1.CloseTimeout = TimeSpan.MaxValue;
 
-            string srvCertCN1 = "Servis";
-            NetTcpBinding binding2 = new NetTcpBinding();
-            binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+            binding1.OpenTimeout = TimeSpan.MaxValue;
 
-            X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:50001/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            binding1.ReceiveTimeout = TimeSpan.MaxValue;
 
-            using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
+            binding1.SendTimeout = TimeSpan.MaxValue;
+
+
+            using (MakeSyslogClient proxy = new MakeSyslogClient(binding1, address1))
             {
                 try
                 {
-                    Console.WriteLine("Kazem serveru da se apdejtuje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
-                    proxy.UpdateConfiguration();
-                    proxy1.Logging(usrname);
-                }catch
+                    Console.WriteLine("Kazem sislogu da upise");
+                    proxy.Logging("lala");
+                }
+                catch
                 {
-                    proxy1.LoggingFail(usrname);
+
                 }
 
             }

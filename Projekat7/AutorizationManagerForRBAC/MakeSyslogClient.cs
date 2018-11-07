@@ -31,9 +31,8 @@ namespace AutorizationManagerForRBAC
                 factory = this.CreateChannel();
             }
 
-
-
-            public void Logging(string userName)
+       
+        public void Logging(string userName)
             {
                 try
                 {

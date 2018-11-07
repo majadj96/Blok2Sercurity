@@ -12,28 +12,30 @@ namespace SysLog
     public class Log : ILog
     {
 
-        static EventLog newLog;
-        static string SourceName = OperationContext.Current.IncomingMessageHeaders.ToString();
-        static string LogName = "LogChanges";
+         EventLog newLog;
+         string SourceName = "lalalala";
+         string LogName = "MAJA";
 
-        static Log()
+        public Log()
         {
             if (!EventLog.SourceExists(SourceName))
             {
+                Console.WriteLine("NE POSTOJI");
                 EventLog.CreateEventSource(SourceName, LogName);
             }
             newLog = new EventLog(LogName, Environment.MachineName, SourceName);
+
         }
 
         public void Logging(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + rbac + " je uspesno izvrsio metodu Change() u " + DateTime.Now );
+            newLog.WriteEntry("Korisnik " + rbac + " je uspesno izvrsio metodu Change() u " + DateTime.Now ,EventLogEntryType.Information);
         }
 
 
         public void LoggingFail(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + rbac + " je nije uspesno izvrsio metodu Change() u " + DateTime.Now);
+            newLog.WriteEntry("Korisnik " + rbac + " je nije uspesno izvrsio metodu Change() u " + DateTime.Now,EventLogEntryType.Error);
         }
 
 

@@ -15,7 +15,8 @@ namespace Common
 
         [OperationContract]
         void LoggingFail(string rbac);
-
+        
+    
 
     }
 }
