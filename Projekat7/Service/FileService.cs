@@ -42,9 +42,9 @@ namespace Service
 
         public void CreateFolder(string foldername)
         {
-           // IPrincipal principal = Thread.CurrentPrincipal;
-           
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            // IPrincipal principal = Thread.CurrentPrincipal;
+
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
            
@@ -70,7 +70,7 @@ namespace Service
 
         public void DeleteFile(string fileName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
 
@@ -103,7 +103,7 @@ namespace Service
 
         public void DeleteFolder(string folderName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
             
@@ -121,7 +121,7 @@ namespace Service
 
         public void ModifyFile(string FileName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
             string user = System.IO.File.GetAccessControl(FileName).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
@@ -146,7 +146,7 @@ namespace Service
 
         public void ModifyFolderName(string folderName,string newName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
 
@@ -169,7 +169,7 @@ namespace Service
 
         public void Read(string fileName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
            
