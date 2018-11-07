@@ -18,86 +18,66 @@ namespace Service
         public void CreateFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
-
-            using (Identity.Impersonate())
-            {
-                if (principal.IsInRole("Read"))
-                {
+             if (principal.IsInRole("Read"))
+             {
                     File.Create(fileName);
                     Console.WriteLine("Fajl je kreiran sa imenom {0}", fileName);
 
-                }
-                else
-                {
-                    //loger
-                    SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-                }
-            }
+             }
+             else
+             {
+                 //loger
+                 SecurityException se = new SecurityException();
+                 Console.WriteLine("This user dont have permission", se.Message);
+             }
+            
         }
 
 
 
         public void CreateFolder(string foldername)
         {
-            // IPrincipal principal = Thread.CurrentPrincipal;
-
-            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
            
-
-           using (Identity.Impersonate())
-           {
-                if (principal.IsInRole("Administrate"))
-                {
-                    System.IO.Directory.CreateDirectory(foldername);
-                    Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
-                }
-                else
-                {
-                    
-                    //loger
-                    SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-                }
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            
+            if (principal.IsInRole("Administrate"))
+            {
+                System.IO.Directory.CreateDirectory(foldername);
+                Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
             }
-        
-            string user = System.IO.File.GetAccessControl(foldername).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
-            Console.WriteLine("FOlder je kreiran od strane {0}", user);
+            else
+            {
+                //loger
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+            }
+          
         }
 
         public void DeleteFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
-
-
-            using (Identity.Impersonate())
+            
+            if (principal.IsInRole("Administrate"))
             {
-                if (principal.IsInRole("Administrate"))
+                if (File.Exists(fileName))
                 {
-                    if (File.Exists(fileName))
-                    {
-                        File.Delete(fileName);
-                        Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
-                    }
-                    else
-                    {
-                        SecurityException se = new SecurityException();
-                        Console.WriteLine("This file not exist", se.Message);
-                    }
+                    File.Delete(fileName);
+                    Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
                 }
                 else
                 {
                     SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-
+                    Console.WriteLine("This file not exist", se.Message);
                 }
             }
+            else
+            {
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+
+            }
+          
         }
 
      
@@ -105,92 +85,74 @@ namespace Service
         public void DeleteFolder(string folderName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
             
-            using (Identity.Impersonate())
-            {
-                var dir = new DirectoryInfo(folderName);
-                if (dir != null)
-                {
-                    dir.Delete(true);
-                    Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
-                }
-            }
+             var dir = new DirectoryInfo(folderName);
+             if (dir != null)
+             {
+                 dir.Delete(true);
+                 Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
+             }
+           
 
         }
 
         public void ModifyFile(string FileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
-            string user = System.IO.File.GetAccessControl(FileName).GetOwner(typeof(System.Security.Principal.NTAccount)).ToString();
-
-            using (Identity.Impersonate())
+           
+            if (principal.IsInRole("Edit"))
             {
-                if (principal.IsInRole("Edit") || user == Identity.Name)
-                {
-                    Console.WriteLine("Unesite dodatak fajlu:");
-                    string tekst = Console.ReadLine();
-                    File.AppendAllText(FileName, tekst);
-                    Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
-                }
-                else
-                {
-                    //loger
-                    SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-                }
+                Console.WriteLine("Unesite dodatak fajlu:");
+                string tekst = Console.ReadLine();
+                File.AppendAllText(FileName, tekst);
+                Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
             }
+            else
+            {
+                //loger
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+            }
+         
         }
 
         public void ModifyFolderName(string folderName,string newName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
-
-            using (Identity.Impersonate())
+            
+            if (principal.IsInRole("Edit"))
             {
-                if (principal.IsInRole("Edit"))
-                {
-                    Directory.Move(folderName, newName);
-                    Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName, newName);
-                }
-                else
-                {
-
-                    SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-
-                }
+                Directory.Move(folderName, newName);
+                Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName, newName);
             }
+            else
+            {
+
+                SecurityException se = new SecurityException();
+                Console.WriteLine("This user dont have permission", se.Message);
+
+            }
+          
         }
 
         public void Read(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            IIdentity id = principal.Identity;
-            WindowsIdentity Identity = id as WindowsIdentity;
            
+           if (principal.IsInRole("Read"))
+           {
 
-            using (Identity.Impersonate())
-            {
-                if (principal.IsInRole("Read"))
-                {
-
-                    string readText = File.ReadAllText(fileName);
-                    Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
-                    Console.WriteLine(readText);
-                }
-                else
-                {
-                    //loger
-                    SecurityException se = new SecurityException();
-                    Console.WriteLine("This user dont have permission", se.Message);
-                }
-            }
+               string readText = File.ReadAllText(fileName);
+               Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
+               Console.WriteLine(readText);
+           }
+           else
+           {
+               //loger
+               SecurityException se = new SecurityException();
+               Console.WriteLine("This user dont have permission", se.Message);
+           }
+         
         }
     }
 }

@@ -40,20 +40,22 @@ namespace Client
             using (ProxyProtection proxy = new ProxyProtection(binding, address))
             {
 
-                Console.WriteLine("*********MENI*********");
-                Console.WriteLine("1. Pravljenje foldera");
-                Console.WriteLine("2. Pravljenje fajla");
-                Console.WriteLine("3. Izmena imena foldera");
-                Console.WriteLine("4. Izmena fajla");
-                Console.WriteLine("5. Citanje iz fajla");
-                Console.WriteLine("6. Brisanje foldera");
-                Console.WriteLine("7. Brisanje fajla");
-                Console.WriteLine("Za zeljenu akciju, izaberite odgovarajucu brojku :)");
-
-                int action = 0;
+                int action;
 
                 do
                 {
+
+                    Console.WriteLine("*********MENI*********");
+                    Console.WriteLine("1. Pravljenje foldera");
+                    Console.WriteLine("2. Pravljenje fajla");
+                    Console.WriteLine("3. Izmena imena foldera");
+                    Console.WriteLine("4. Izmena fajla");
+                    Console.WriteLine("5. Citanje iz fajla");
+                    Console.WriteLine("6. Brisanje foldera");
+                    Console.WriteLine("7. Brisanje fajla");
+                    Console.WriteLine("Za zeljenu akciju, izaberite odgovarajucu brojku :)");
+
+                    action = 0;
 
                     action = Convert.ToInt32(Console.ReadLine());
 
