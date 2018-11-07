@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,20 +18,20 @@ namespace SysLog
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            string address = "net.tcp://localhost:50001/UpdateConfig";
+            string address = "net.tcp://localhost:50002/Log";
 
-            ServiceHost hostForRBAC = new ServiceHost(typeof(UpdateConfig));
-            hostForRBAC.AddServiceEndpoint(typeof(IUpdateConfig), binding, address);
-            hostForRBAC.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            hostForRBAC.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
-            hostForRBAC.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
-            hostForRBAC.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
+            ServiceHost hostForLog = new ServiceHost(typeof(Log));
+            hostForLog.AddServiceEndpoint(typeof(ILog), binding, address);
+            hostForLog.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+            hostForLog.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
+            hostForLog.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+            hostForLog.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
 
             try
             {
-                hostForRBAC.Open();
-                Console.WriteLine("Service for RBAC host is started.");
-                return hostForRBAC;
+                hostForLog.Open();
+                Console.WriteLine("Service for log host is started.");
+                return hostForLog;
             }
             catch (Exception e)
             {
@@ -42,6 +44,15 @@ namespace SysLog
 
         static void Main(string[] args)
         {
+            ServiceHost hostForLog = CreateHostForLog();
+
+
+
+            Console.ReadLine();
+
+            hostForLog.Close();
+
+
         }
     }
 }
