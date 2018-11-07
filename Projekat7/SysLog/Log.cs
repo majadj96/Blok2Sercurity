@@ -26,12 +26,22 @@ namespace SysLog
 
         public void Logging(string methodName, string userName)
         {
-            newLog.WriteEntry("Korisnik " + userName + " successfully accessed to " + methodName);
+            newLog.WriteEntry("Korisnik " + userName + " je uspesno pristupio " + methodName);
+        }
+
+        public void LoggingChange(string userName)
+        {
+            newLog.WriteEntry("Konfiguracija je izmenjena. Server "+userName+" prihvatio");
+
         }
 
         public void LoggingFail(string methodName, string userName, string reason)
         {
-            newLog.WriteEntry("User " + userName + " failed to access " + methodName + ". Reason: " + reason);
+            newLog.WriteEntry("Korisnik " + userName + " je neuspesno pristupio metodi " + methodName + ". Razlog: " + reason);
         }
+
+
+
+
     }
 }
