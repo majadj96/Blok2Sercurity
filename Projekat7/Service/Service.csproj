@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit.cs" />
     <Compile Include="FileService.cs" />
     <Compile Include="HostProtection.cs" />
     <Compile Include="Program.cs" />

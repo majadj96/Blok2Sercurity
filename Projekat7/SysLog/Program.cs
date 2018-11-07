@@ -45,9 +45,7 @@ namespace SysLog
         static void Main(string[] args)
         {
             ServiceHost hostForLog = CreateHostForLog();
-
-
-
+            
             Console.ReadLine();
 
             hostForLog.Close();
