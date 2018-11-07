@@ -33,11 +33,11 @@ namespace AutorizationManagerForRBAC
 
 
 
-            public void Logging(string methoodName, string userName)
+            public void Logging(string userName)
             {
                 try
                 {
-                    factory.Logging(methoodName, userName);
+                    factory.Logging(userName);
                     Console.WriteLine("Logging() allowed");
 
                 }
@@ -47,11 +47,11 @@ namespace AutorizationManagerForRBAC
                 }
             }
 
-            public void LoggingFail(string methodName, string userName, string reason)
+            public void LoggingFail(string userName)
             {
                 try
                 {
-                    factory.LoggingFail(methodName, userName, reason);
+                    factory.LoggingFail(userName);
                     Console.WriteLine("LoggingFail() allowed");
 
                 }

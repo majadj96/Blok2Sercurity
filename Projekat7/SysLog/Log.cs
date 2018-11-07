@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +13,8 @@ namespace SysLog
     {
 
         static EventLog newLog;
-        static string SourceName = "SysLog";
-        static string LogName = "LogServis";
+        static string SourceName = OperationContext.Current.IncomingMessageHeaders.ToString();
+        static string LogName = "LogChanges";
 
         static Log()
         {
@@ -24,20 +25,15 @@ namespace SysLog
             newLog = new EventLog(LogName, Environment.MachineName, SourceName);
         }
 
-        public void Logging(string methodName, string userName)
+        public void Logging(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + userName + " je uspesno pristupio " + methodName);
+            newLog.WriteEntry("Korisnik " + rbac + " je uspesno izvrsio metodu Change() u " + DateTime.Now );
         }
 
-        public void LoggingChange(string userName)
-        {
-            newLog.WriteEntry("Konfiguracija je izmenjena. Server "+userName+" prihvatio");
 
-        }
-
-        public void LoggingFail(string methodName, string userName, string reason)
+        public void LoggingFail(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + userName + " je neuspesno pristupio metodi " + methodName + ". Razlog: " + reason);
+            newLog.WriteEntry("Korisnik " + rbac + " je nije uspesno izvrsio metodu Change() u " + DateTime.Now);
         }
 
 

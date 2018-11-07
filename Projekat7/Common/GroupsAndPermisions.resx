@@ -121,7 +121,7 @@
     <value>Administrate,Access</value>
   </data>
   <data name="Modifier" xml:space="preserve">
-    <value>Read,Edit,Access</value>
+    <value>Read</value>
   </data>
   <data name="Reader" xml:space="preserve">
     <value>Read,Access</value>
