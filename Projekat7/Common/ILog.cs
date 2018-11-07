@@ -16,6 +16,9 @@ namespace Common
         [OperationContract]
         void LoggingFail(string methodName, string userName,string reason);
 
+         [OperationContract]
+        void LoggingChange(string userName);
+
 
     }
 }
