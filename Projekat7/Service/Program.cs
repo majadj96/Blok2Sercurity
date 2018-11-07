@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
+using System.ServiceModel;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +54,7 @@ namespace Service
 
             hostProtection.Open(mode);
 
+            Console.ReadLine();
             hostProtection.Close();
             hostForRBAC.Close();
 
