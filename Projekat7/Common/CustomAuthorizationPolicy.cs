@@ -56,9 +56,10 @@ namespace SecurityManager
         {
             get
             {
-                if (customPrincipalInstance == null)
+                if (customPrincipalInstance == null || ConfigurationUpdate)
                 {
                     customPrincipalInstance = new CustomPrincipal(windowsIdentity);
+                    ConfigurationUpdate = false;
                 }
                 return customPrincipalInstance;
             }
