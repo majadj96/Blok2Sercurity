@@ -11,13 +11,13 @@ namespace Common
    public interface IFileService
     {
         [OperationContract]
-        void CreateFolder(string foldername);
+        void CreateFolder(string folderName);
 
         [OperationContract]
-        void CreateFile();
+        void CreateFile(string fileName);
 
         [OperationContract]
-        void ModifyFolderName();
+        void ModifyFolderName(string folderName,string newName);
 
         [OperationContract]
         void ModifyFile();
@@ -26,9 +26,9 @@ namespace Common
         void Read();
 
         [OperationContract]
-        void DeleteFolder();
+        void DeleteFolder(string folderName);
 
         [OperationContract]
-        void DeleteFile();
+        void DeleteFile(string fileName);
     }
 }
