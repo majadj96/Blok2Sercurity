@@ -21,14 +21,15 @@ namespace Service
              if (principal.IsInRole("Read"))
              {
                     File.Create(fileName);
+                    Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name,"CreateFile()");
                     Console.WriteLine("Fajl je kreiran sa imenom {0}", fileName);
 
              }
              else
              {
-                 //loger
-                 SecurityException se = new SecurityException();
-                 Console.WriteLine("This user dont have permission", se.Message);
+                SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFile()",se.Message);
+                Console.WriteLine("This user dont have permission", se.Message);
              }
             
         }
@@ -43,12 +44,14 @@ namespace Service
             if (principal.IsInRole("Administrate"))
             {
                 System.IO.Directory.CreateDirectory(foldername);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "CreateFolder()");
                 Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
             }
             else
             {
                 //loger
                 SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFolder()", se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
             }
           
@@ -63,17 +66,20 @@ namespace Service
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
+                    Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()");
                     Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
                 }
                 else
                 {
                     SecurityException se = new SecurityException();
+                    Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()", se.Message);
                     Console.WriteLine("This file not exist", se.Message);
                 }
             }
             else
             {
                 SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()", se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
 
             }
@@ -90,9 +96,12 @@ namespace Service
              if (dir != null)
              {
                  dir.Delete(true);
-                 Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()");
+                Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
              }
-           
+            Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()","File not exists");
+
+
 
         }
 
@@ -105,12 +114,16 @@ namespace Service
                 Console.WriteLine("Unesite dodatak fajlu:");
                 string tekst = Console.ReadLine();
                 File.AppendAllText(FileName, tekst);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()");
+
                 Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
             }
             else
             {
                 //loger
                 SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()", se.Message);
+
                 Console.WriteLine("This user dont have permission", se.Message);
             }
          
@@ -123,12 +136,16 @@ namespace Service
             if (principal.IsInRole("Edit"))
             {
                 Directory.Move(folderName, newName);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFolderName()");
+
                 Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName, newName);
             }
             else
             {
 
                 SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "ModifyFolderName()", se.Message);
+
                 Console.WriteLine("This user dont have permission", se.Message);
 
             }
@@ -143,14 +160,18 @@ namespace Service
            {
 
                string readText = File.ReadAllText(fileName);
-               Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "Read()");
+
+                Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
                Console.WriteLine(readText);
            }
            else
            {
                //loger
                SecurityException se = new SecurityException();
-               Console.WriteLine("This user dont have permission", se.Message);
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "Read()", se.Message);
+
+                Console.WriteLine("This user dont have permission", se.Message);
            }
          
         }
