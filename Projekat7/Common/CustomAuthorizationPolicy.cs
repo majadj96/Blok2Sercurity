@@ -7,7 +7,7 @@ using System.IdentityModel.Claims;
 using System.Security.Principal;
 using Common;
 
-namespace SecurityManager
+namespace Common
 {
 	public class CustomAuthorizationPolicy : IAuthorizationPolicy
 	{
@@ -65,7 +65,7 @@ namespace SecurityManager
             }
         }
 
-        protected virtual IPrincipal GetPrincipal(IIdentity identity)
+        public virtual IPrincipal GetPrincipal(IIdentity identity)
 		{
 			lock (locker)
 			{
@@ -82,6 +82,8 @@ namespace SecurityManager
 				return principal;
 			}
 		}
+
+
 
 		
 	}

@@ -20,6 +20,7 @@ namespace RBACClient
 
 
             ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+
             foreach (DictionaryEntry d in rsxr)
             {
                 string name = d.Key.ToString();
