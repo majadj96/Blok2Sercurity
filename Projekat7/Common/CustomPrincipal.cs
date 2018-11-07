@@ -24,7 +24,7 @@ namespace Common
         {
             GroupsAndPermissions gp = new GroupsAndPermissions();
 
-            //dodaj pewrmisije
+            
             foreach (IdentityReference group in windowsIdentity.Groups)
             {
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
