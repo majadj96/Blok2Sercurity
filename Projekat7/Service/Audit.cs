@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class Audit
+    public static class Audit
     {
-        static string SourceName = OperationContext.Current.IncomingMessageHeaders.ToString();
+        static string SourceName = OperationContext.Current.IncomingMessageHeaders.Action;
         static string LogName = "LogServis";
         static EventLog newLog;
 
@@ -25,13 +25,13 @@ namespace Service
 
         public static void LoggingSuccess(string korisnickoIme, string imeMetode)
         {
-            newLog.WriteEntry("Korisnik " + korisnickoIme + " je supesno pristupio metodi " + imeMetode);
+            newLog.WriteEntry("Korisnik " + korisnickoIme + " je upesno pristupio metodi " + imeMetode,EventLogEntryType.Information);
 
         }
 
         public static void LoggingFail(string korisnickoIme, string imeMetode, string razlog)
         {
-            newLog.WriteEntry("Korisnik " + korisnickoIme + " je neuspesno pristupio " + imeMetode + ". Razlog: " + razlog);
+            newLog.WriteEntry("Korisnik " + korisnickoIme + " je neuspesno pristupio " + imeMetode + ". Razlog: " + razlog,EventLogEntryType.Error);
         }
 
 
