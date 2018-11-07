@@ -15,7 +15,7 @@ namespace Client
 
         public ProxyProtection(NetTcpBinding binding, string address) : base(binding, address)
         {
-
+            this.Credentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
             factory = this.CreateChannel();
         }
 

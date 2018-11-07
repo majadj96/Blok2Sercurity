@@ -7,7 +7,7 @@ using System.IdentityModel.Claims;
 using System.Security.Principal;
 using Common;
 
-namespace SecurityManager
+namespace Common
 {
 	public class CustomAuthorizationPolicy : IAuthorizationPolicy
 	{

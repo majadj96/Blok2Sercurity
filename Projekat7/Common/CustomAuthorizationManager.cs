@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Threading;
 using Common;
 
-namespace SecurityManager
+namespace Common
 {
 	public class CustomAuthorizationManager : ServiceAuthorizationManager
 	{
