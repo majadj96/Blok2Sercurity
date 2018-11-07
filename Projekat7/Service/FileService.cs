@@ -17,7 +17,7 @@ namespace Service
 
         public void CreateFile(string fileName)
         {
-            IPrincipal principal = Common.CustomAuthorizationPolicy.CustomPrincipalInstance;
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             IIdentity id = principal.Identity;
             WindowsIdentity Identity = id as WindowsIdentity;
 

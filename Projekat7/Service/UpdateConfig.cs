@@ -13,6 +13,10 @@ namespace Service
         {
             Console.WriteLine("Apdejtovao sam se " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
 
+            foreach(CustomPrincipal cp in InMemoryCash.PrincipalDict.Values)
+            {
+                cp.UpdatePermissions(cp.WindowsIdentity);
+            }
             Console.WriteLine("Updated configuration");
         }
     }
