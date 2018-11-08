@@ -54,6 +54,8 @@ namespace Common
 
        
 
+
+
         public virtual IPrincipal GetPrincipal(IIdentity identity)
 		{
 			lock (locker)
