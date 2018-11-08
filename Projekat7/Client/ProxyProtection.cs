@@ -20,7 +20,10 @@ namespace Client
 
             Console.WriteLine("Unesite port:");
             string port = Console.ReadLine();
-            string address = "net.tcp://localhost:" + port +"/FileService";
+            Console.WriteLine("Unesite ip adresu na kom je Servis: ");
+            string ip = Console.ReadLine();
+
+            string address = "net.tcp://"+ip+":" + port +"/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
            

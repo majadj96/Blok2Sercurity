@@ -21,7 +21,12 @@ namespace SysLog
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            string address = "net.tcp://localhost:50002/Log";
+            Console.WriteLine("Unesite port na kom je Servis: ");
+            string port = Console.ReadLine();
+
+          
+
+            string address = "net.tcp://localhost:"+port+"/Log";
 
             ServiceHost hostForLog = new ServiceHost(typeof(Log));
             hostForLog.AddServiceEndpoint(typeof(ILog), binding, address);
