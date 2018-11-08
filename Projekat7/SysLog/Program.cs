@@ -33,7 +33,7 @@ namespace SysLog
 
             hostForLog.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             hostForLog.Description.Behaviors.Add(new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
-            return hostForLog;
+
         }
 
 
