@@ -46,9 +46,11 @@ namespace AutorizationManagerForRBAC
             Console.WriteLine("Unesite port na kom je Servis: ");
             string port = Console.ReadLine();
 
+            Console.WriteLine("Unesite ip adresu na kom je Servis: ");
+            string ip = Console.ReadLine();
 
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:"+port+"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://"+ip+":"+port+"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
             binding2.CloseTimeout = TimeSpan.MaxValue;
 
             binding2.OpenTimeout = TimeSpan.MaxValue;
@@ -64,8 +66,15 @@ namespace AutorizationManagerForRBAC
             NetTcpBinding binding1 = new NetTcpBinding();
             binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
+            Console.WriteLine("Unesite port na kom je Servis: ");
+             port = Console.ReadLine();
+
+            Console.WriteLine("Unesite ip adresu na kom je Servis: ");
+             ip = Console.ReadLine();
+
+
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
+            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://"+ip+":"+port+"/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
