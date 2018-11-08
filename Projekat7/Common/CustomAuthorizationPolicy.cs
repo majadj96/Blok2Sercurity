@@ -49,17 +49,10 @@ namespace Common
 			return true;
 		}
 
-        private static CustomPrincipal customPrincipalInstance;
+       
         private static WindowsIdentity windowsIdentity;
 
-        public static CustomPrincipal CustomPrincipalInstance
-        {
-            get
-            {
-                
-                return customPrincipalInstance;
-            }
-        }
+       
 
         public virtual IPrincipal GetPrincipal(IIdentity identity)
 		{
@@ -77,7 +70,7 @@ namespace Common
                         InMemoryCash.PrincipalDict.Add(windowsIdentity.User, new CustomPrincipal(windowsIdentity));
                         principal = InMemoryCash.PrincipalDict[windowsIdentity.User];
                     }
-                    //Audit.AuthenticationSuccess(windowsIdentity.Name);
+                    
                     
                 }
 

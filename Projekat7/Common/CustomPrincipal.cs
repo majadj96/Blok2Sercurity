@@ -12,21 +12,24 @@ namespace Common
     {
         public IIdentity Identity { get { return WindowsIdentity; } }
         public WindowsIdentity WindowsIdentity;
-        List<string> permissions = new List<string>();
+        public List<string> permissions = new List<string>();
+        public GroupsAndPermissions gp = new GroupsAndPermissions();
 
         public CustomPrincipal(WindowsIdentity windowsIdentity)
         {
             WindowsIdentity = windowsIdentity;
+           
             UpdatePermissions(WindowsIdentity);
         }
 
         public void UpdatePermissions(WindowsIdentity windowsIdentity)
         {
-            GroupsAndPermissions gp = new GroupsAndPermissions();
-
-            
+            permissions = new List<string>();
+            gp.UpdatePermissionsGroup();
+           
             foreach (IdentityReference group in windowsIdentity.Groups)
             {
+                
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
                 var name = sid.Translate(typeof(NTAccount));
                 string[] split = name.ToString().Split('\\');
@@ -36,7 +39,7 @@ namespace Common
                 else
                     keyDict = " ";
 
-
+              
                 if (GroupsAndPermissions.GroupsAndPermissionsDict.ContainsKey(keyDict))
                 {
                     List<string> perms = GroupsAndPermissions.GroupsAndPermissionsDict[keyDict];
@@ -47,7 +50,10 @@ namespace Common
                     }
 
                 }
+                
             }
+   
+
         }
 
         public bool IsInRole(string permission)

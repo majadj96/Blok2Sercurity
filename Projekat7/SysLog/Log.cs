@@ -13,14 +13,13 @@ namespace SysLog
     {
 
          EventLog newLog;
-         string SourceName = "lalalala";
-         string LogName = "MAJA";
+         string SourceName = "RBAC";
+         string LogName = "SysLoger";
 
         public Log()
         {
             if (!EventLog.SourceExists(SourceName))
             {
-                Console.WriteLine("NE POSTOJI");
                 EventLog.CreateEventSource(SourceName, LogName);
             }
             newLog = new EventLog(LogName, Environment.MachineName, SourceName);
@@ -29,13 +28,13 @@ namespace SysLog
 
         public void Logging(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + rbac + " je uspesno izvrsio metodu Change() u " + DateTime.Now ,EventLogEntryType.Information);
+            newLog.WriteEntry("User " + rbac + " successfully accessed to Change() at " + DateTime.Now ,EventLogEntryType.Information);
         }
 
 
         public void LoggingFail(string rbac)
         {
-            newLog.WriteEntry("Korisnik " + rbac + " je nije uspesno izvrsio metodu Change() u " + DateTime.Now,EventLogEntryType.Error);
+            newLog.WriteEntry("User " + rbac + " failed to access to Change() at " + DateTime.Now,EventLogEntryType.Error);
         }
 
 

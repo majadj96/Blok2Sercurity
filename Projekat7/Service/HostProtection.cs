@@ -57,8 +57,7 @@ namespace Service
             string line = string.Empty;
 
             host.Open();
-            Console.WriteLine("WCFService is opened. Press <enter> to finish...");
-            Console.ReadLine();
+            Console.WriteLine("Servis is opened for clients and waiting..");
         }
 
         public void Close()

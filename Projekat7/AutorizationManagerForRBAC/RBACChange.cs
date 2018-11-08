@@ -7,6 +7,7 @@ using System.Resources;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutorizationManagerForRBAC
@@ -36,15 +37,7 @@ namespace AutorizationManagerForRBAC
             writer.Generate();
             writer.Close();
             
-
-            Console.WriteLine("Promena u RESX-u!");
-
-
-
-
-
-
-
+            
             string srvCertCN1 = "Servis";
             NetTcpBinding binding2 = new NetTcpBinding();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
@@ -59,22 +52,7 @@ namespace AutorizationManagerForRBAC
 
             binding2.SendTimeout = TimeSpan.MaxValue;
 
-          
-
-
-            using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
-            {
-                try
-                {
-                    Console.WriteLine("Kazem serveru da se apdejtuje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
-                    proxy.UpdateConfiguration();
-                }catch
-                {
-
-                }
-
-            }
-
+            
 
             string srvCertCN = "SysLog";
             NetTcpBinding binding1 = new NetTcpBinding();
@@ -84,7 +62,7 @@ namespace AutorizationManagerForRBAC
             EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
-            Console.WriteLine("Kazem serveru da se loguje " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
+            Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
             string usrname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
 
@@ -96,21 +74,30 @@ namespace AutorizationManagerForRBAC
 
             binding1.SendTimeout = TimeSpan.MaxValue;
 
+            
 
-            using (MakeSyslogClient proxy = new MakeSyslogClient(binding1, address1))
+            MakeSyslogClient proxyLog = new MakeSyslogClient(binding1, address1);
+            
+
+            using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
             {
                 try
                 {
-                    Console.WriteLine("Kazem sislogu da upise");
-                    proxy.Logging("lala");
+                    Console.WriteLine("Server is going to update " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
+
+                    proxy.UpdateConfiguration();
+                    proxyLog.Logging(Thread.CurrentPrincipal.Identity.Name);
+                    
+
                 }
                 catch
                 {
-
+                    proxyLog.LoggingFail(Thread.CurrentPrincipal.Identity.Name);
                 }
 
             }
 
+            
         }
 
     }

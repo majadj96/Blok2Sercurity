@@ -25,13 +25,13 @@ namespace Service
 
         public static void LoggingSuccess(string korisnickoIme, string imeMetode)
         {
-            newLog.WriteEntry("Korisnik " + korisnickoIme + " je upesno pristupio metodi " + imeMetode,EventLogEntryType.Information);
+            newLog.WriteEntry("User " + korisnickoIme + " successfully accessed to " + imeMetode,EventLogEntryType.Information);
 
         }
 
         public static void LoggingFail(string korisnickoIme, string imeMetode, string razlog)
         {
-            newLog.WriteEntry("Korisnik " + korisnickoIme + " je neuspesno pristupio " + imeMetode + ". Razlog: " + razlog,EventLogEntryType.Error);
+            newLog.WriteEntry("User " + korisnickoIme + " failed to access to " + imeMetode + ". Reason: " + razlog,EventLogEntryType.Error);
         }
 
 

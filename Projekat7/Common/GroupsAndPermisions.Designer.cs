@@ -61,7 +61,7 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read,Edit,Access,Administrate.
+        ///   Looks up a localized string similar to Access,Administrate,Read,Edit.
         /// </summary>
         internal static string Administrator2 {
             get {
@@ -70,7 +70,7 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read,Edit,Access.
+        ///   Looks up a localized string similar to Access,Edit,Read.
         /// </summary>
         internal static string Modifier {
             get {
@@ -79,7 +79,7 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read,Access.
+        ///   Looks up a localized string similar to Access,Read.
         /// </summary>
         internal static string Reader {
             get {

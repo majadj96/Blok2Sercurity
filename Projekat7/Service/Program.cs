@@ -26,19 +26,7 @@ namespace Service
             hostForRBAC.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
             hostForRBAC.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
             hostForRBAC.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-
-            try
-            {
-                hostForRBAC.Open();
-                Console.WriteLine("Service for RBAC host is started.");
-                return hostForRBAC;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("[ERROR] {0}", e.Message);
-                //  Console.WriteLine("[StackTrace] {0}", e.StackTrace);
-                return null;
-            }
+            return hostForRBAC;
         }
 
 
@@ -47,13 +35,15 @@ namespace Service
             
             ServiceHost hostForRBAC = CreateHostForRBAC();
           
-            Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode");
+            Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();
 
             HostProtection hostProtection = new HostProtection(mode);
 
-            hostProtection.Open(mode);
 
+            hostForRBAC.Open();
+            hostProtection.Open(mode);
+            
             Console.ReadLine();
             hostProtection.Close();
             hostForRBAC.Close();

@@ -22,7 +22,7 @@ namespace Service
              {
                     File.Create(fileName);
                     Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name,"CreateFile()");
-                    Console.WriteLine("Fajl je kreiran sa imenom {0}", fileName);
+                    Console.WriteLine("File is created with name {0}", fileName);
 
              }
              else
@@ -45,7 +45,7 @@ namespace Service
             {
                 System.IO.Directory.CreateDirectory(foldername);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "CreateFolder()");
-                Console.WriteLine("Folder je kreiran sa imenom {0}", foldername);
+                Console.WriteLine("Folder is created with name {0}", foldername);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace Service
                 {
                     File.Delete(fileName);
                     Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()");
-                    Console.WriteLine("Fajl je obrisan sa imenom {0}", fileName);
+                    Console.WriteLine("File {0} is deleted.", fileName);
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace Service
              {
                  dir.Delete(true);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()");
-                Console.WriteLine("folder je obrisan sa imenom {0}", folderName);
+                Console.WriteLine("Folder {0} is deleted.", folderName);
              }
             Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()","File not exists");
 
@@ -111,12 +111,12 @@ namespace Service
            
             if (principal.IsInRole("Edit"))
             {
-                Console.WriteLine("Unesite dodatak fajlu:");
+                Console.WriteLine("Modify file:");
                 string tekst = Console.ReadLine();
                 File.AppendAllText(FileName, tekst);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()");
 
-                Console.WriteLine("Fajl je izmenjen sa imenom {0}", FileName);
+                Console.WriteLine("File {0} is modified.", FileName);
             }
             else
             {
@@ -138,7 +138,7 @@ namespace Service
                 Directory.Move(folderName, newName);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFolderName()");
 
-                Console.WriteLine("ime Foldera {0} je izmenjeno, novo ime je: {1}", folderName, newName);
+                Console.WriteLine("Folder name {0} is changed to {1}.", folderName, newName);
             }
             else
             {
@@ -162,7 +162,7 @@ namespace Service
                string readText = File.ReadAllText(fileName);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "Read()");
 
-                Console.WriteLine("citanje iz fajla sa imenom {0}", fileName);
+                Console.WriteLine("Text from file {0}", fileName);
                Console.WriteLine(readText);
            }
            else

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,7 @@ namespace Common
         public static Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
         public GroupsAndPermissions()
         {
-            UpdatePermissions();
+            UpdatePermissionsGroup();
         }
 
         public List<string> GetPermissions(string group)
@@ -20,11 +21,15 @@ namespace Common
             return retList;
         }
 
-        public void UpdatePermissions()
+        public void UpdatePermissionsGroup()
         {
+            GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
+            
             ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
             foreach (DictionaryEntry d in rsxr)
             {
+                Console.WriteLine(d.Key.ToString());
+
                 string name = d.Key.ToString();
                 string value = d.Value.ToString();
                 string[] split = value.Split(',');

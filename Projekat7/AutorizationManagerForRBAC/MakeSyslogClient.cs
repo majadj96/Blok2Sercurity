@@ -38,7 +38,6 @@ namespace AutorizationManagerForRBAC
                 {
                     factory.Logging(userName);
                     Console.WriteLine("Logging() allowed");
-
                 }
                 catch (CommunicationException comEx)
                 {
