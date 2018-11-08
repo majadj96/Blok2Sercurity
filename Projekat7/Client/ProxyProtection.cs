@@ -18,12 +18,9 @@ namespace Client
         {
             NetTcpBinding binding = new NetTcpBinding();
 
-            Console.WriteLine("Unesite port:");
-            string port = Console.ReadLine();
-            Console.WriteLine("Unesite ip adresu na kom je Servis: ");
-            string ip = Console.ReadLine();
+         
 
-            string address = "net.tcp://"+ip+":" + port +"/FileService";
+            string address = "net.tcp://localhost:9997/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
            
@@ -35,14 +32,12 @@ namespace Client
                 binding.Security.Mode = SecurityMode.Transport;
                 binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                Console.WriteLine("TRANSPORT");
 
             }
             else if (forSend.Equals("m"))
             {
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
-                Console.WriteLine("MESSAGE");
 
             }
    
@@ -54,8 +49,6 @@ namespace Client
             try
             {
                 factory.CreateFolder(foldername);
-                Console.WriteLine("CreateFolder() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -68,8 +61,6 @@ namespace Client
             try
             {
                 factory.CreateFile(filename);
-                Console.WriteLine("CreateFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -82,8 +73,6 @@ namespace Client
             try
             {
                 factory.ModifyFolderName(folderName,newName);
-                Console.WriteLine("ModifyFolderName() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -96,8 +85,6 @@ namespace Client
             try
             {
                 factory.ModifyFile(FileName);
-                Console.WriteLine("ModifyFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -110,8 +97,6 @@ namespace Client
             try
             {
                 factory.Read(FileName);
-                Console.WriteLine("Read() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -124,8 +109,6 @@ namespace Client
             try
             {
                 factory.DeleteFolder(folderName);
-                Console.WriteLine("DeleteFolder() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -138,12 +121,24 @@ namespace Client
             try
             {
                 factory.DeleteFile(fileName);
-                Console.WriteLine("DeleteFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to DeleteFile(). {0}", comEx.Message);
+            }
+        }
+
+        public void CheckLevel()
+        {
+            try
+            {
+                factory.CheckLevel();
+                Console.WriteLine("Successfully conected to the servis :)");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("There is no server with that kind of binding mode");
             }
         }
     }

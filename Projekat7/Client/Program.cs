@@ -14,8 +14,8 @@ namespace Client
         {
             using (ProxyProtection proxy = new ProxyProtection())
             {
-               
 
+                proxy.CheckLevel();
 
                 int action;
 

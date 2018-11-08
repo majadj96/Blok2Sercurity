@@ -20,10 +20,8 @@ namespace Service
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-            Console.WriteLine("Unesite port na kom hostujete RBACA: ");
-            string port = Console.ReadLine();
-
-            string address = "net.tcp://localhost:"+port+"/UpdateConfig";
+         
+            string address = "net.tcp://localhost:9999/UpdateConfig";
             ServiceHost hostForRBAC = new ServiceHost(typeof(UpdateConfig));
             hostForRBAC.AddServiceEndpoint(typeof(IUpdateConfig), binding, address);
             hostForRBAC.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;

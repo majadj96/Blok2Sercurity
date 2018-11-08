@@ -13,7 +13,9 @@ namespace Service
 {
     class FileService : IFileService
     {
-        
+        public void CheckLevel()
+        {
+        }
 
         public void CreateFile(string fileName)
         {

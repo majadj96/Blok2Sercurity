@@ -11,6 +11,9 @@ namespace Common
    public interface IFileService
     {
         [OperationContract]
+        void CheckLevel();
+
+        [OperationContract]
         void CreateFolder(string foldername);
 
         [OperationContract]
