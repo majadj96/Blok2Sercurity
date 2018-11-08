@@ -18,12 +18,9 @@ namespace Client
         {
             NetTcpBinding binding = new NetTcpBinding();
 
-            Console.WriteLine("Unesite port:");
-            string port = Console.ReadLine();
-            Console.WriteLine("Unesite ip adresu na kom je Servis: ");
-            string ip = Console.ReadLine();
+         
 
-            string address = "net.tcp://"+ip+":" + port +"/FileService";
+            string address = "net.tcp://localhost:9997/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
            
@@ -35,14 +32,12 @@ namespace Client
                 binding.Security.Mode = SecurityMode.Transport;
                 binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                Console.WriteLine("TRANSPORT");
 
             }
             else if (forSend.Equals("m"))
             {
                 binding.Security.Mode = SecurityMode.Message;
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
-                Console.WriteLine("MESSAGE");
 
             }
    
@@ -130,6 +125,20 @@ namespace Client
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to DeleteFile(). {0}", comEx.Message);
+            }
+        }
+
+        public void CheckLevel()
+        {
+            try
+            {
+                factory.CheckLevel();
+                Console.WriteLine("Successfully conected to the servis :)");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("There is no server with that kind of binding mode");
             }
         }
     }

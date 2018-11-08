@@ -33,10 +33,8 @@ namespace Service
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
             }
 
-            Console.WriteLine("Unesite port na kom hostujete: ");
-            string port = Console.ReadLine();
             
-            string address = "net.tcp://localhost:"+port+"/FileService";
+            string address = "net.tcp://localhost:9997/FileService";
             
             host = new ServiceHost(typeof(FileService));
             host.AddServiceEndpoint(typeof(IFileService), binding, address);
