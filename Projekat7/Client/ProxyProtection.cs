@@ -54,8 +54,6 @@ namespace Client
             try
             {
                 factory.CreateFolder(foldername);
-                Console.WriteLine("CreateFolder() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -68,8 +66,6 @@ namespace Client
             try
             {
                 factory.CreateFile(filename);
-                Console.WriteLine("CreateFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -82,8 +78,6 @@ namespace Client
             try
             {
                 factory.ModifyFolderName(folderName,newName);
-                Console.WriteLine("ModifyFolderName() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -96,8 +90,6 @@ namespace Client
             try
             {
                 factory.ModifyFile(FileName);
-                Console.WriteLine("ModifyFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -110,8 +102,6 @@ namespace Client
             try
             {
                 factory.Read(FileName);
-                Console.WriteLine("Read() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -124,8 +114,6 @@ namespace Client
             try
             {
                 factory.DeleteFolder(folderName);
-                Console.WriteLine("DeleteFolder() allowed");
-
             }
             catch (CommunicationException comEx)
             {
@@ -138,8 +126,6 @@ namespace Client
             try
             {
                 factory.DeleteFile(fileName);
-                Console.WriteLine("DeleteFile() allowed");
-
             }
             catch (CommunicationException comEx)
             {
