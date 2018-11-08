@@ -28,7 +28,6 @@ namespace Common
             ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
             foreach (DictionaryEntry d in rsxr)
             {
-                Console.WriteLine(d.Key.ToString());
 
                 string name = d.Key.ToString();
                 string value = d.Value.ToString();
