@@ -19,7 +19,11 @@ namespace Service
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            string address = "net.tcp://localhost:50001/UpdateConfig";
+
+            Console.WriteLine("Unesite port na kom hostujete RBACA: ");
+            string port = Console.ReadLine();
+
+            string address = "net.tcp://localhost:"+port+"/UpdateConfig";
             ServiceHost hostForRBAC = new ServiceHost(typeof(UpdateConfig));
             hostForRBAC.AddServiceEndpoint(typeof(IUpdateConfig), binding, address);
             hostForRBAC.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;

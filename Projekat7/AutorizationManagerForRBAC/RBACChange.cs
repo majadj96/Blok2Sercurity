@@ -42,8 +42,13 @@ namespace AutorizationManagerForRBAC
             NetTcpBinding binding2 = new NetTcpBinding();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
+
+            Console.WriteLine("Unesite port na kom je Servis: ");
+            string port = Console.ReadLine();
+
+
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:50001/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:"+port+"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
             binding2.CloseTimeout = TimeSpan.MaxValue;
 
             binding2.OpenTimeout = TimeSpan.MaxValue;
