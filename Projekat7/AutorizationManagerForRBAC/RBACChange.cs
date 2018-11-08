@@ -59,6 +59,7 @@ namespace AutorizationManagerForRBAC
 
             
 
+
             string srvCertCN = "SysLog";
             NetTcpBinding binding1 = new NetTcpBinding();
             binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
