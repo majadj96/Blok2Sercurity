@@ -12,11 +12,16 @@ namespace Client
     public class ProxyProtection : ChannelFactory<IFileService>, IFileService, IDisposable
     {
         IFileService factory;
-        NetTcpBinding binding = new NetTcpBinding();
-        string address = "net.tcp://localhost:9999/FileService";
+        
 
         public ProxyProtection()
         {
+            NetTcpBinding binding = new NetTcpBinding();
+
+            Console.WriteLine("Unesite port:");
+            string port = Console.ReadLine();
+            string address = "net.tcp://localhost:" + port +"/FileService";
+
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
            
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
