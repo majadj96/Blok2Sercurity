@@ -34,27 +34,16 @@ namespace SysLog
             hostForLog.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             hostForLog.Description.Behaviors.Add(new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
 
-
-
-            try
-            {
-                hostForLog.Open();
-                Console.WriteLine("Service for log host is started.");
-                return hostForLog;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("[ERROR] {0}", e.Message);
-                //  Console.WriteLine("[StackTrace] {0}", e.StackTrace);
-                return null;
-            }
         }
 
 
         static void Main(string[] args)
         {
             ServiceHost hostForLog = CreateHostForLog();
-            
+
+
+            hostForLog.Open();
+
             Console.ReadLine();
 
             hostForLog.Close();

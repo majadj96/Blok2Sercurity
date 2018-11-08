@@ -32,7 +32,7 @@ namespace RBACClient
             int brojac = 0;
             foreach (string grupe in GroupsAndPermissionsDict.Keys)
             {
-                Console.WriteLine(brojac+++".Grupa: " + grupe);
+                Console.WriteLine(brojac+++". Grupa: " + grupe);
 
                 Console.WriteLine("Permisije");
                 foreach (string permisija in GroupsAndPermissionsDict[grupe])
@@ -58,7 +58,6 @@ namespace RBACClient
                 Console.WriteLine("R-Read");
                 Console.WriteLine("E-Edit");
                 Console.WriteLine("A-Access");
-                Console.WriteLine("0 - Gotovo");
 
                 permis = Console.ReadLine();
 
@@ -87,7 +86,6 @@ namespace RBACClient
 
             } while (permis != "n");
 
-            Console.WriteLine("************************");
             brojac = 0;
             foreach (string grupe in GroupsAndPermissionsDict.Keys)
             {

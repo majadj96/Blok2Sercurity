@@ -12,10 +12,6 @@ namespace Client
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("cao");
-
-        
             using (ProxyProtection proxy = new ProxyProtection())
             {
 

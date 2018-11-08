@@ -32,14 +32,11 @@ namespace Service
 
         static void Main(string[] args)
         {
-            
-            ServiceHost hostForRBAC = CreateHostForRBAC();
-          
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();
 
             HostProtection hostProtection = new HostProtection(mode);
-
+            ServiceHost hostForRBAC = CreateHostForRBAC();
 
             hostForRBAC.Open();
             hostProtection.Open(mode);
@@ -47,9 +44,7 @@ namespace Service
             Console.ReadLine();
             hostProtection.Close();
             hostForRBAC.Close();
-
-
-
+            
         }
 
       

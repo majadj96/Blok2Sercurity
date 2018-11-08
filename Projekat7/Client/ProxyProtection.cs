@@ -37,9 +37,7 @@ namespace Client
                 Console.WriteLine("MESSAGE");
 
             }
-
-            this.Credentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
-          //  factory = this.CreateChannel();
+   
             factory = channelFactory.CreateChannel();
         }
 
