@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 
-namespace Common
+namespace AutorizationManagerForRBAC
 {
     public class GroupsAndPermissions
     {
@@ -25,7 +25,7 @@ namespace Common
         {
             GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
             
-            ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            ResXResourceReader rsxr = new ResXResourceReader("..\\..\\GroupsAndPermisions.resx");
             foreach (DictionaryEntry d in rsxr)
             {
 
