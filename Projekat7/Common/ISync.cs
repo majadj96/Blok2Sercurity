@@ -14,5 +14,8 @@ namespace Common
         [OperationContract]
         Dictionary<string, List<string>> SetDictionary();
 
+        [OperationContract]
+        string GetPort(string ip);
+
     }
 }

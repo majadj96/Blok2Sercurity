@@ -14,6 +14,8 @@ namespace AutorizationManagerForRBAC
 {
     class RBACChange : IRBACChange
     {
+        public static List<string> ListOfServers = new List<string>();
+
         public void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict)
         {
             ResXResourceWriter writer = new ResXResourceWriter("..\\..\\GroupsAndPermisions.resx");
