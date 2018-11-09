@@ -14,9 +14,11 @@ namespace AutorizationManagerForRBAC
 {
     class RBACChange : IRBACChange
     {
+        public static List<string> ListOfServers = new List<string>();
+
         public void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict)
         {
-            ResXResourceWriter writer = new ResXResourceWriter("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            ResXResourceWriter writer = new ResXResourceWriter("..\\..\\GroupsAndPermisions.resx");
             string permisije = string.Empty;
 
 
@@ -54,11 +56,8 @@ namespace AutorizationManagerForRBAC
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
             EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://"+ add +":"+ port +"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
             binding2.CloseTimeout = TimeSpan.MaxValue;
-
             binding2.OpenTimeout = TimeSpan.MaxValue;
-
             binding2.ReceiveTimeout = TimeSpan.MaxValue;
-
             binding2.SendTimeout = TimeSpan.MaxValue;
 
             
