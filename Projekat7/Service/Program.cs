@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
@@ -16,7 +18,7 @@ namespace Service
     {
         public static RBACProxy proxy;
 
-        static ServiceHost CreateHostForRBAC()
+        static ServiceHost CreateHostForRBAC(string port)
         {
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             NetTcpBinding binding = new NetTcpBinding();
@@ -24,12 +26,9 @@ namespace Service
 
 
             //ELENA 9.11.
-            Console.WriteLine("Unesite port za KanalKaServisu:");
-            string port = Console.ReadLine();
-            Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
-            string add = Console.ReadLine();
-
-            string address = "net.tcp://" + add + ":" + port + "/UpdateConfig";
+           
+            
+            string address = "net.tcp://localhost:" + port + "/UpdateConfig";
 
            
             ServiceHost hostForRBAC = new ServiceHost(typeof(UpdateConfig));
@@ -59,9 +58,26 @@ namespace Service
 
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();
-
             HostProtection hostProtection = new HostProtection(mode);
-            ServiceHost hostForRBAC = CreateHostForRBAC();
+
+
+            //moze i u fju
+            string IP4Address = String.Empty;
+
+            foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
+            {
+                if (IPA.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    IP4Address = IPA.ToString();
+                    break;
+                }
+            }
+
+            string port = IP4Address;
+            ServiceHost hostForRBAC = CreateHostForRBAC(port);
+
+          //  proxy.GetPort(port);
+
 
             //hostForRBAC.Open();
             hostProtection.Open(mode);
