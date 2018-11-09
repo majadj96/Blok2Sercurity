@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Common {
+namespace AutorizationManagerForRBAC {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Common {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Common.GroupsAndPermisions", typeof(GroupsAndPermisions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutorizationManagerForRBAC.GroupsAndPermisions", typeof(GroupsAndPermisions).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access,Administrate.
+        ///   Looks up a localized string similar to Administrate,Access,Read,Edit.
         /// </summary>
         internal static string Administrator2 {
             get {

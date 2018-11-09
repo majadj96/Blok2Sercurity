@@ -18,12 +18,10 @@ namespace RBACClient
             NetTcpBinding binding = new NetTcpBinding();
 
             //ELENA 9.11.
-            Console.WriteLine("Unesite port za KanalKaRBACServisu:");
-            string port = Console.ReadLine();
             Console.WriteLine("Unesite ipadresu za KanalKaRBACServisu:");
             string add = Console.ReadLine();
 
-            string address = "net.tcp://" + add + ":" + port + "/RBACChange";
+            string address = "net.tcp://" + add + ":9998/RBACChange";
 
             Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
 

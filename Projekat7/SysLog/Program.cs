@@ -21,10 +21,7 @@ namespace SysLog
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            Console.WriteLine("Unesite port na kom je Servis: ");
-            string port = Console.ReadLine();
-
-          
+           
 
             string address = "net.tcp://localhost:50002/Log";
 
@@ -49,6 +46,7 @@ namespace SysLog
 
 
             hostForLog.Open();
+            Console.WriteLine("SysLog je spreman da loguje...");
 
             Console.ReadLine();
 

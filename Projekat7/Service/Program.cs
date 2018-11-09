@@ -73,10 +73,13 @@ namespace Service
                 }
             }
 
-            string port = IP4Address;
+            string port = proxy.GetPort(IP4Address);
+            Console.WriteLine("PORT JE:" + port);
+            string adresaRBAC = IP4Address + ":" + port;
             ServiceHost hostForRBAC = CreateHostForRBAC(port);
+            Console.WriteLine("Napravio host za rbac");
 
-            proxy.GetPort(port);
+            
 
 
             hostForRBAC.Open();
