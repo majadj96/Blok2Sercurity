@@ -76,7 +76,7 @@ namespace Service
             string port = IP4Address;
             ServiceHost hostForRBAC = CreateHostForRBAC(port);
 
-          //  proxy.GetPort(port);
+            proxy.GetPort(port);
 
 
             //hostForRBAC.Open();

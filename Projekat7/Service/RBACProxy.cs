@@ -17,7 +17,23 @@ namespace Service
 
             factory = this.CreateChannel();
         }
-        
+
+        public string GetPort(string ip)
+        {
+            string port=string.Empty;
+            try
+            {
+                port = factory.GetPort(ip);
+                Console.WriteLine("SetDictionary() allowed");
+
+            }
+            catch (CommunicationException comEx)
+            {
+                Console.WriteLine("Error while trying to SetDictionary(). {0}", comEx.Message);
+            }
+            return port;
+
+        }
 
         public Dictionary<string, List<string>> SetDictionary()
         {
