@@ -34,5 +34,23 @@ namespace RBACClient
                 Console.WriteLine("Error while trying to Change(). {0}", comEx.Message);
             }
         }
+
+        public Dictionary<string, List<string>> GetDictionary()
+        {
+            try
+            { 
+
+            Console.WriteLine("GetDictonary() allowed");
+
+            return factory.GetDictionary();
+
+            }
+            catch (CommunicationException comEx)
+            {
+                
+                Console.WriteLine("Error while trying to GetDictonary(). {0}", comEx.Message);
+                return null;
+            }
+        }
     }
 }

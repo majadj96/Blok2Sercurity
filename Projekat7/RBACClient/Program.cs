@@ -24,20 +24,16 @@ namespace RBACClient
             string add = Console.ReadLine();
 
             string address = "net.tcp://" + add + ":" + port + "/RBACChange";
+
+            Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
+
+            MakeProxy proxy = new MakeProxy(binding, address);
+
+            GroupsAndPermissionsDict = proxy.GetDictionary();
             
-
-
-            ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
-
-            foreach (DictionaryEntry d in rsxr)
-            {
-                string name = d.Key.ToString();
-                string value = d.Value.ToString();
-                string[] split = value.Split(',');
-                List<string> listaPermisija = split.ToList();
-                GroupsAndPermissionsDict.Add(name, listaPermisija);
-            }
+           
             int brojac = 0;
+
             foreach (string grupe in GroupsAndPermissionsDict.Keys)
             {
                 Console.WriteLine(brojac+++". Grupa: " + grupe);
@@ -109,9 +105,9 @@ namespace RBACClient
             }
 
 
-            using (MakeProxy proxy = new MakeProxy(binding, address))
+            using (MakeProxy proxy1 = new MakeProxy(binding, address))
             {
-                proxy.Change(GroupsAndPermissionsDict);
+                proxy1.Change(GroupsAndPermissionsDict);
                 Console.ReadLine();
             }
             

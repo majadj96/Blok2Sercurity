@@ -17,6 +17,7 @@ namespace AutorizationManagerForRBAC
             ServiceHost host;
             NetTcpBinding binding = new NetTcpBinding();
 
+
             string address = "net.tcp://localhost:9998/RBACChange";
             
             host = new ServiceHost(typeof(RBACChange));
