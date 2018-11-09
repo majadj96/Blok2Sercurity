@@ -61,7 +61,7 @@ namespace Service
             HostProtection hostProtection = new HostProtection(mode);
 
 
-            //moze i u fju
+            
             string IP4Address = String.Empty;
 
             foreach (IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
@@ -74,10 +74,9 @@ namespace Service
             }
 
             string port = proxy.GetPort(IP4Address);
-            Console.WriteLine("PORT JE:" + port);
-            string adresaRBAC = IP4Address + ":" + port;
+            
             ServiceHost hostForRBAC = CreateHostForRBAC(port);
-            Console.WriteLine("Napravio host za rbac");
+           
 
             
 

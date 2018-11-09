@@ -17,14 +17,12 @@ namespace Client
         public ProxyProtection()
         {
             NetTcpBinding binding = new NetTcpBinding();
-
-
-            //ELENA 9.11.
-            Console.WriteLine("Unesite port za KanalKaServisu:");
-            string port = Console.ReadLine();
+            
             Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
             string add = Console.ReadLine();
-   
+            Console.WriteLine("Unesite port za KanalKaServisu:");
+            string port = Console.ReadLine();
+            
             string address = "net.tcp://" + add + ":" + port + "/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);

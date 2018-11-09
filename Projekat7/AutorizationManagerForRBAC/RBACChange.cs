@@ -44,14 +44,7 @@ namespace AutorizationManagerForRBAC
             NetTcpBinding binding2 = new NetTcpBinding();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-
-            //ELENA 9.11.
-          /*  Console.WriteLine("Unesite port za KanalKaServisu:");
-            string port = Console.ReadLine();
-            Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
-            string add = Console.ReadLine();*/
-
-
+            
 
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
             
@@ -70,11 +63,11 @@ namespace AutorizationManagerForRBAC
 
 
             //ELENA 9.11.
-           // Console.WriteLine("Unesite ipadresu za KanalKaSysLogu:");
-           // string add1= Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu SysLog:");
+            string add1= Console.ReadLine();
 
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
+            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
@@ -96,12 +89,8 @@ namespace AutorizationManagerForRBAC
 
              foreach(string s in ListOfServers)
              {
-            //     Console.WriteLine(s);
-
-           // string s = ListOfServers[0];
-            Console.WriteLine(s);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://" + s + "/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
-           // EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:50011/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+                 EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://" + s + "/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+           
                 using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
                 {
                     try
@@ -109,7 +98,7 @@ namespace AutorizationManagerForRBAC
                         Console.WriteLine("Server is going to update " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
 
                         proxy.UpdateConfiguration();
-                        Console.WriteLine("Uradio update treba logovanje");
+                       
                         proxyLog.Logging(Thread.CurrentPrincipal.Identity.Name);
 
 

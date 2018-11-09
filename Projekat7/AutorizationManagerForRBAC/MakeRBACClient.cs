@@ -34,7 +34,7 @@ namespace AutorizationManagerForRBAC
         {
             try
             {
-                Console.WriteLine("Usao u updateConfiguration ide factory.UpdateConfig");
+                
                 factory.UpdateConfiguration();
                 Console.WriteLine("UpdateConfig() allowed");
 
