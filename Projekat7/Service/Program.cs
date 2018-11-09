@@ -20,8 +20,16 @@ namespace Service
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-         
-            string address = "net.tcp://localhost:9999/UpdateConfig";
+
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za KanalKaServisu:");
+            string port = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
+            string add = Console.ReadLine();
+
+            string address = "net.tcp://" + add + ":" + port + "/UpdateConfig";
+
+           
             ServiceHost hostForRBAC = new ServiceHost(typeof(UpdateConfig));
             hostForRBAC.AddServiceEndpoint(typeof(IUpdateConfig), binding, address);
             hostForRBAC.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
@@ -40,7 +48,7 @@ namespace Service
             HostProtection hostProtection = new HostProtection(mode);
             ServiceHost hostForRBAC = CreateHostForRBAC();
 
-            hostForRBAC.Open();
+            //hostForRBAC.Open();
             hostProtection.Open(mode);
             
             Console.ReadLine();

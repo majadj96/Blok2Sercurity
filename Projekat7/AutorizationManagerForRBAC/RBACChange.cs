@@ -43,10 +43,16 @@ namespace AutorizationManagerForRBAC
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
 
-          
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za KanalKaServisu:");
+            string port = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
+            string add = Console.ReadLine();
+
+
 
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://localhost:9999/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://"+ add +":"+ port +"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
             binding2.CloseTimeout = TimeSpan.MaxValue;
 
             binding2.OpenTimeout = TimeSpan.MaxValue;
@@ -62,10 +68,15 @@ namespace AutorizationManagerForRBAC
             NetTcpBinding binding1 = new NetTcpBinding();
             binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-            
+
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za KanalKaSysLogu:");
+            string port1 = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za KanalKaSysLogu:");
+            string add1= Console.ReadLine();
 
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://10.1.212.176:50000/Log"), new X509CertificateEndpointIdentity(srvCert));
+            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":" + port1 + "/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));

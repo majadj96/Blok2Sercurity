@@ -16,7 +16,15 @@ namespace RBACClient
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9998/RBACChange";
+
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za KanalKaRBACServisu:");
+            string port = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za KanalKaRBACServisu:");
+            string add = Console.ReadLine();
+
+            string address = "net.tcp://" + add + ":" + port + "/RBACChange";
+            
 
 
             ResXResourceReader rsxr = new ResXResourceReader("..\\..\\..\\Common\\GroupsAndPermisions.resx");
