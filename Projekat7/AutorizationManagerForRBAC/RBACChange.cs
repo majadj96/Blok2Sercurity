@@ -46,15 +46,15 @@ namespace AutorizationManagerForRBAC
 
 
             //ELENA 9.11.
-            Console.WriteLine("Unesite port za KanalKaServisu:");
+          /*  Console.WriteLine("Unesite port za KanalKaServisu:");
             string port = Console.ReadLine();
             Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
-            string add = Console.ReadLine();
+            string add = Console.ReadLine();*/
 
 
 
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
-            EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://"+ add +":"+ port +"/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+            
             binding2.CloseTimeout = TimeSpan.MaxValue;
             binding2.OpenTimeout = TimeSpan.MaxValue;
             binding2.ReceiveTimeout = TimeSpan.MaxValue;
@@ -92,25 +92,31 @@ namespace AutorizationManagerForRBAC
             
 
             MakeSyslogClient proxyLog = new MakeSyslogClient(binding1, address1);
-            
 
-            using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
+
+            foreach(string s in ListOfServers)
             {
-                try
+                EndpointAddress address2 = new EndpointAddress(new Uri("net.tcp://" + s + "/UpdateConfig"), new X509CertificateEndpointIdentity(srvCert1));
+                using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
                 {
-                    Console.WriteLine("Server is going to update " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
+                    try
+                    {
+                        Console.WriteLine("Server is going to update " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
 
-                    proxy.UpdateConfiguration();
-                    proxyLog.Logging(Thread.CurrentPrincipal.Identity.Name);
-                    
+                        proxy.UpdateConfiguration();
+                        proxyLog.Logging(Thread.CurrentPrincipal.Identity.Name);
+
+
+                    }
+                    catch
+                    {
+                        proxyLog.LoggingFail(Thread.CurrentPrincipal.Identity.Name);
+                    }
 
                 }
-                catch
-                {
-                    proxyLog.LoggingFail(Thread.CurrentPrincipal.Identity.Name);
-                }
-
             }
+            
+            
 
             
         }

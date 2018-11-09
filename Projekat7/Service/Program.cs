@@ -79,7 +79,7 @@ namespace Service
             proxy.GetPort(port);
 
 
-            //hostForRBAC.Open();
+            hostForRBAC.Open();
             hostProtection.Open(mode);
             
             Console.ReadLine();
