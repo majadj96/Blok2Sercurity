@@ -63,7 +63,7 @@ namespace Service
             HostProtection hostProtection = new HostProtection(mode);
             ServiceHost hostForRBAC = CreateHostForRBAC();
 
-            //hostForRBAC.Open();
+            hostForRBAC.Open();
             hostProtection.Open(mode);
             
             Console.ReadLine();
