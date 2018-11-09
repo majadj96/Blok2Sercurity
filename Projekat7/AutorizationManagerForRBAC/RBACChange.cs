@@ -16,7 +16,7 @@ namespace AutorizationManagerForRBAC
     {
         public void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict)
         {
-            ResXResourceWriter writer = new ResXResourceWriter("..\\..\\..\\Common\\GroupsAndPermisions.resx");
+            ResXResourceWriter writer = new ResXResourceWriter("..\\..\\GroupsAndPermisions.resx");
             string permisije = string.Empty;
 
 
@@ -70,13 +70,11 @@ namespace AutorizationManagerForRBAC
 
 
             //ELENA 9.11.
-            Console.WriteLine("Unesite port za KanalKaSysLogu:");
-            string port1 = Console.ReadLine();
             Console.WriteLine("Unesite ipadresu za KanalKaSysLogu:");
             string add1= Console.ReadLine();
 
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":" + port1 + "/Log"), new X509CertificateEndpointIdentity(srvCert));
+            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
