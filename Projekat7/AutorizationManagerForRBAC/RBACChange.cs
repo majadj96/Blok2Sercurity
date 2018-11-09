@@ -117,5 +117,24 @@ namespace AutorizationManagerForRBAC
             
         }
 
+        public Dictionary<string, List<string>> GetDictionary()
+        {
+
+            Dictionary<string, List<string>> GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
+
+            ResXResourceReader rsxr = new ResXResourceReader("..\\..\\GroupsAndPermisions.resx");
+            foreach (DictionaryEntry d in rsxr)
+            {
+
+                string name = d.Key.ToString();
+                string value = d.Value.ToString();
+                string[] split = value.Split(',');
+                List<string> listaPermisija = split.ToList();
+                GroupsAndPermissionsDict.Add(name, listaPermisija);
+            }
+            return GroupsAndPermissionsDict;
+
+
+        }
     }
 }

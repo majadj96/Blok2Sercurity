@@ -13,5 +13,8 @@ namespace Common
         [OperationContract]
         void Change(Dictionary<string, List<string>> GroupsAndPermissionsDict);
 
+
+        [OperationContract]
+        Dictionary<string, List<string>> GetDictionary();
     }
 }
