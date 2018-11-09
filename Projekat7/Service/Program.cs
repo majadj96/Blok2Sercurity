@@ -43,7 +43,7 @@ namespace Service
 
         public static void UpdateDictionary()
         {
-            InMemoryCash.GroupsAndPermissionsDictionary = proxy.GetDictionary();
+            InMemoryCash.GroupsAndPermissionsDictionary = proxy.SetDictionary();
         }
 
 
@@ -55,7 +55,7 @@ namespace Service
             string address = "net.tcp://"+ip+":50010/Sync";
 
             proxy = new RBACProxy(binding, address);
-            InMemoryCash.GroupsAndPermissionsDictionary = proxy.GetDictionary();
+            InMemoryCash.GroupsAndPermissionsDictionary = proxy.SetDictionary();
 
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();

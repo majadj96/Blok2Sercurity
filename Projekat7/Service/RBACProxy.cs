@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -16,10 +17,9 @@ namespace Service
 
             factory = this.CreateChannel();
         }
+        
 
-
-
-        public Dictionary<string, List<string>> GetDictionary()
+        public Dictionary<string, List<string>> SetDictionary()
         {
             Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
 
