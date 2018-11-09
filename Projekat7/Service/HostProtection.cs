@@ -36,10 +36,9 @@ namespace Service
             //ELENA 9.11.
             Console.WriteLine("Unesite port za Klijenta:");
             string port = Console.ReadLine();
-            Console.WriteLine("Unesite ipadresu za Klijenta:");
-            string add = Console.ReadLine();
+          
 
-            string address = "net.tcp://" + add + ":" + port + "/FileService";
+            string address = "net.tcp://localhost:" + port + "/FileService";
             
             
             host = new ServiceHost(typeof(FileService));
