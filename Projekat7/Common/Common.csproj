@@ -50,6 +50,7 @@
     <Compile Include="IFileService.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IRBACChange.cs" />
+    <Compile Include="ISync.cs" />
     <Compile Include="IUpdateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCertValidator.cs" />

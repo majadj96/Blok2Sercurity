@@ -33,8 +33,14 @@ namespace Service
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
             }
 
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za HostProtection:");
+            string port = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za HostProtection:");
+            string add = Console.ReadLine();
+
+            string address = "net.tcp://" + add + ":" + port + "/FileService";
             
-            string address = "net.tcp://localhost:9997/FileService";
             
             host = new ServiceHost(typeof(FileService));
             host.AddServiceEndpoint(typeof(IFileService), binding, address);

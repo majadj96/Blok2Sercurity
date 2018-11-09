@@ -30,15 +30,13 @@ namespace AutorizationManagerForRBAC
 
 
 
-            string addressService = "net.tcp://localhost:50010/RBACChange";
+            string addressService = "net.tcp://localhost:50010/Sync";
 
-            hostService = new ServiceHost(typeof(RBACChange));
-            hostService.AddServiceEndpoint(typeof(IRBACChange), binding, address);
+            hostService = new ServiceHost(typeof(Sync));
+            hostService.AddServiceEndpoint(typeof(ISync), bindingService, addressService);
             hostService.Open();
             Console.WriteLine("I'm ready for servers 8-)");
 
-
-            
 
             
 

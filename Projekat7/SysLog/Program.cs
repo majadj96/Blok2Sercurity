@@ -26,7 +26,7 @@ namespace SysLog
 
           
 
-            string address = "net.tcp://localhost:"+port+"/Log";
+            string address = "net.tcp://localhost:50002/Log";
 
             ServiceHost hostForLog = new ServiceHost(typeof(Log));
             hostForLog.AddServiceEndpoint(typeof(ILog), binding, address);

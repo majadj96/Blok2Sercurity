@@ -18,9 +18,14 @@ namespace Client
         {
             NetTcpBinding binding = new NetTcpBinding();
 
-         
 
-            string address = "net.tcp://localhost:9997/FileService";
+            //ELENA 9.11.
+            Console.WriteLine("Unesite port za KanalKaServisu:");
+            string port = Console.ReadLine();
+            Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
+            string add = Console.ReadLine();
+   
+            string address = "net.tcp://" + add + ":" + port + "/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
            
