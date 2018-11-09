@@ -53,6 +53,7 @@
     <Compile Include="InMemoryCash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RBACProxy.cs" />
     <Compile Include="UpdateConfig.cs" />
   </ItemGroup>
   <ItemGroup>
