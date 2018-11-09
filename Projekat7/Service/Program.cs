@@ -14,6 +14,8 @@ namespace Service
 {
     class Program
     {
+        public static RBACProxy proxy;
+
         static ServiceHost CreateHostForRBAC()
         {
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
@@ -41,13 +43,19 @@ namespace Service
 
         public static void UpdateDictionary()
         {
-
+            InMemoryCash.GroupsAndPermissionsDictionary = proxy.GetDictionary();
         }
 
 
         static void Main(string[] args)
         {
+            NetTcpBinding binding = new NetTcpBinding();
+            Console.WriteLine("Unesite IP adresu RBAC servera:");
+            string ip = Console.ReadLine();
+            string address = "net.tcp://"+ip+":50010/Sync";
 
+            proxy = new RBACProxy(binding, address);
+            InMemoryCash.GroupsAndPermissionsDictionary = proxy.GetDictionary();
 
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();
