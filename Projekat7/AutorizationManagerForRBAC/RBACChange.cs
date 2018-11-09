@@ -64,7 +64,7 @@ namespace AutorizationManagerForRBAC
 
             //ELENA 9.11.
             Console.WriteLine("Unesite ipadresu SysLog:");
-            string add1= Console.ReadLine();
+            string add1 = Console.ReadLine();
 
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
