@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Service
 {
     public class CustomPrincipal : IPrincipal
     {
         public IIdentity Identity { get { return WindowsIdentity; } }
         public WindowsIdentity WindowsIdentity;
         public List<string> permissions = new List<string>();
-        public GroupsAndPermissions gp = new GroupsAndPermissions();
+        
 
         public CustomPrincipal(WindowsIdentity windowsIdentity)
         {
@@ -25,7 +25,7 @@ namespace Common
         public void UpdatePermissions(WindowsIdentity windowsIdentity)
         {
             permissions = new List<string>();
-            gp.UpdatePermissionsGroup();
+            Program.UpdateDictionary();
            
             foreach (IdentityReference group in windowsIdentity.Groups)
             {
@@ -40,9 +40,9 @@ namespace Common
                     keyDict = " ";
 
               
-                if (GroupsAndPermissions.GroupsAndPermissionsDict.ContainsKey(keyDict))
+                if (InMemoryCash.GroupsAndPermissionsDictionary.ContainsKey(keyDict))
                 {
-                    List<string> perms = GroupsAndPermissions.GroupsAndPermissionsDict[keyDict];
+                    List<string> perms = InMemoryCash.GroupsAndPermissionsDictionary[keyDict];
                     foreach (string perm in perms)
                     {
                         if (!permissions.Contains(perm))

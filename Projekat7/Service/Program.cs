@@ -39,9 +39,16 @@ namespace Service
             return hostForRBAC;
         }
 
+        public static void UpdateDictionary()
+        {
+
+        }
+
 
         static void Main(string[] args)
         {
+
+
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string mode = Console.ReadLine();
 

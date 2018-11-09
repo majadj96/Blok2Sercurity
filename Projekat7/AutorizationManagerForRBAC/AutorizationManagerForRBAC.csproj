@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupsAndPermisions.Designer.cs">
+      <DependentUpon>GroupsAndPermisions.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GroupsAndPermissions.cs" />
     <Compile Include="MakeRBACClient.cs" />
     <Compile Include="MakeSyslogClient.cs" />
     <Compile Include="Program.cs" />
@@ -60,6 +67,13 @@
       <Project>{6E2CA4FB-EEA1-49FA-88EF-9BD22160421B}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GroupsAndPermisions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GroupsAndPermisions.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,9 +24,26 @@ namespace AutorizationManagerForRBAC
             host.Open();
             Console.WriteLine("I'm ready for changes 8-)");
 
-           
-            Console.ReadLine();
 
+            ServiceHost hostService;
+            NetTcpBinding bindingService = new NetTcpBinding();
+
+
+
+            string addressService = "net.tcp://localhost:50010/RBACChange";
+
+            hostService = new ServiceHost(typeof(RBACChange));
+            hostService.AddServiceEndpoint(typeof(IRBACChange), binding, address);
+            hostService.Open();
+            Console.WriteLine("I'm ready for servers 8-)");
+
+
+            
+
+            
+
+            Console.ReadLine();
+            hostService.Close();
             host.Close();
 
 
