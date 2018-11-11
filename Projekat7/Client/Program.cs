@@ -18,7 +18,7 @@ namespace Client
                 proxy.CheckLevel();
 
                 int action;
-
+                bool result;
                 do
                 {
 
@@ -41,39 +41,72 @@ namespace Client
                         case 1:
                             Console.WriteLine("Molim vas upisete zeljeno ime za folder:");
                             string foldeName = Console.ReadLine();
-                            proxy.CreateFolder(foldeName);
+                            result = proxy.CreateFolder(foldeName);
+                            if (result)
+                                Console.WriteLine("Folder uspesno kreiran.");
+                            else
+                                Console.WriteLine("Folder nije kreiran.");
+                            
                             break;
+
                         case 2:
                             Console.WriteLine("Molim vas upisete zeljeno ime za fajl:");
                             string fileName = Console.ReadLine();
-                            proxy.CreateFile(fileName);
+                            result = proxy.CreateFile(fileName);
+                            if (result)
+                                Console.WriteLine("Fajl uspesno kreiran.");
+                            else
+                                Console.WriteLine("Fajl nije kreiran.");
                             break;
+
                         case 3:
                             Console.WriteLine("Molim vas upisete folder cije ime zelite da izmenite:");
                             string oldName = Console.ReadLine();
                             Console.WriteLine("Molim vas upisete zeljeno ime za folder:");
                             string newName = Console.ReadLine();
-                            proxy.ModifyFolderName(oldName,newName);
+                            result = proxy.ModifyFolderName(oldName,newName);
+                            if (result)
+                                Console.WriteLine("Folder uspesno izmenjen.");
+                            else
+                                Console.WriteLine("Folder nije izmenjen.");
+
                             break;
+
                         case 4:
                             Console.WriteLine("Molim vas upisete koji fajl zelite da izmenite:");
                             string fileNameM = Console.ReadLine();
-                            proxy.ModifyFile(fileNameM);
+                            result = proxy.ModifyFile(fileNameM);
+                            if (result)
+                                Console.WriteLine("Fajl uspesno izmenjen.");
+                            else
+                                Console.WriteLine("Fajln nije izmenjen.");
                             break;
                         case 5:
                             Console.WriteLine("Molim vas upisete ime fajla koji zelite da procitate:");
                             string fileName2 = Console.ReadLine();
-                            proxy.Read(fileName2);
+                            result =  proxy.Read(fileName2);
+                            if (result)
+                                Console.WriteLine("Fajl uspesno procitan.");
+                            else
+                                Console.WriteLine("Fajl nije procitan.");
                             break;
                         case 6:
                             Console.WriteLine("Molim vas upisete ime foldera koji zelite da obrisete:");
                             string foldeName2 = Console.ReadLine();
-                            proxy.DeleteFolder(foldeName2);
+                            result = proxy.DeleteFolder(foldeName2);
+                            if (result)
+                                Console.WriteLine("Folder uspesno izbrisan.");
+                            else
+                                Console.WriteLine("Folder nije izbrisan.");
                             break;
                         case 7:
                             Console.WriteLine("Molim vas upisete ime fajla koji zelite da obrisete:");
                             string fileNameD = Console.ReadLine();
-                            proxy.DeleteFile(fileNameD);
+                            result = proxy.DeleteFile(fileNameD);
+                            if (result)
+                                Console.WriteLine("Fajl uspesno izbrisan.");
+                            else
+                                Console.WriteLine("Fajl nije izbrisan.");
                             break;
 
                     }

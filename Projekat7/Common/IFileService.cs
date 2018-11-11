@@ -14,24 +14,24 @@ namespace Common
         void CheckLevel();
 
         [OperationContract]
-        void CreateFolder(string foldername);
+        bool CreateFolder(string foldername);
 
         [OperationContract]
-        void CreateFile(string fileName);
+        bool CreateFile(string fileName);
 
         [OperationContract]
-        void ModifyFolderName(string folderName, string newName);
+        bool ModifyFolderName(string folderName, string newName);
 
         [OperationContract]
-        void ModifyFile(string FileName);
+        bool ModifyFile(string FileName);
 
         [OperationContract]
-        void Read(string FileName);
+        bool Read(string FileName);
 
         [OperationContract]
-        void DeleteFolder(string folderName);
+        bool DeleteFolder(string folderName);
 
         [OperationContract]
-        void DeleteFile(string fileName);
+        bool DeleteFile(string fileName);
     }
 }

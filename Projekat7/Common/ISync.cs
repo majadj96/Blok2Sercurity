@@ -17,5 +17,8 @@ namespace Common
         [OperationContract]
         string GetPort(string ip);
 
+        [OperationContract]
+        bool isAlive();
+
     }
 }

@@ -43,47 +43,33 @@ namespace AutorizationManagerForRBAC
             string srvCertCN1 = "Servis";
             NetTcpBinding binding2 = new NetTcpBinding();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
-            
-
             X509Certificate2 srvCert1 = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN1);
             
             binding2.CloseTimeout = TimeSpan.MaxValue;
             binding2.OpenTimeout = TimeSpan.MaxValue;
             binding2.ReceiveTimeout = TimeSpan.MaxValue;
             binding2.SendTimeout = TimeSpan.MaxValue;
-
-
             
-
-
             string srvCertCN = "SysLog";
             NetTcpBinding binding1 = new NetTcpBinding();
             binding1.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-
-
-            //ELENA 9.11.
-            Console.WriteLine("Unesite ipadresu SysLog:");
-            string add1 = Console.ReadLine();
-
+            
+           //Console.WriteLine("Unesite ipadresu SysLog:");
+          // string add1 = Console.ReadLine();
+            
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
-            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
+           // EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
+            EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
 
             MakeSyslogClient proxy1 = new MakeSyslogClient(binding1, address1);
             Console.WriteLine("Server is going to log " + DateTime.Now.ToString("hh.mm.ss.ffffff"));
             string usrname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-
-
-            binding1.CloseTimeout = TimeSpan.MaxValue;
-
-            binding1.OpenTimeout = TimeSpan.MaxValue;
-
-            binding1.ReceiveTimeout = TimeSpan.MaxValue;
-
-            binding1.SendTimeout = TimeSpan.MaxValue;
-
             
-
+            binding1.CloseTimeout = TimeSpan.MaxValue;     
+            binding1.OpenTimeout = TimeSpan.MaxValue;
+            binding1.ReceiveTimeout = TimeSpan.MaxValue;
+            binding1.SendTimeout = TimeSpan.MaxValue;
+            
             MakeSyslogClient proxyLog = new MakeSyslogClient(binding1, address1);
 
 
@@ -93,6 +79,7 @@ namespace AutorizationManagerForRBAC
            
                 using (MakeRBACClient proxy = new MakeRBACClient(binding2, address2))
                 {
+
                     try
                     {
                         Console.WriteLine("Server is going to update " + DateTime.Now.ToString("hh.mm.ss.ffffff"));

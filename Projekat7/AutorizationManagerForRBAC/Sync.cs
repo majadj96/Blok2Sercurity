@@ -39,5 +39,11 @@ namespace AutorizationManagerForRBAC
             }
             return GroupsAndPermissionsDict;
         }
+
+        public bool isAlive()
+        {
+            Console.WriteLine("RBAC is alive");
+            return true;
+        }
     }
 }

@@ -24,12 +24,12 @@ namespace Service
             try
             {
                 port = factory.GetPort(ip);
-                Console.WriteLine("SetDictionary() allowed");
+                Console.WriteLine("GetPort() allowed");
 
             }
             catch (CommunicationException comEx)
             {
-                Console.WriteLine("Error while trying to SetDictionary(). {0}", comEx.Message);
+                Console.WriteLine("Error while trying to GetPort(). {0}", comEx.Message);
             }
             return port;
 
@@ -51,6 +51,23 @@ namespace Service
             }
 
             return dict;
+        }
+
+        public bool isAlive()
+        {
+            bool res;
+            try
+            {
+                res = factory.isAlive();
+                Console.WriteLine("RBAC is alive");
+                return true;
+
+            }
+            catch (CommunicationException comEx)
+            {
+                //Console.WriteLine("Error while trying to check rbac is alive. {0}", comEx.Message);
+                return false;
+            }
         }
     }
 }

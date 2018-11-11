@@ -47,87 +47,101 @@ namespace Client
             factory = channelFactory.CreateChannel();
         }
 
-        public void CreateFolder(string foldername)
+        public bool CreateFolder(string foldername)
         {
             try
             {
                 factory.CreateFolder(foldername);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void CreateFile(string filename)
+        public bool CreateFile(string filename)
         {
             try
             {
                 factory.CreateFile(filename);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to CreateFolder(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void ModifyFolderName(string folderName, string newName)
+        public bool ModifyFolderName(string folderName, string newName)
         {
             try
             {
                 factory.ModifyFolderName(folderName,newName);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to ModifyFolderName(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void ModifyFile(string FileName)
+        public bool ModifyFile(string FileName)
         {
             try
             {
                 factory.ModifyFile(FileName);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to ModifyFile(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void Read(string FileName)
+        public bool Read(string FileName)
         {
             try
             {
                 factory.Read(FileName);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to Read(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void DeleteFolder(string folderName)
+        public bool DeleteFolder(string folderName)
         {
             try
             {
                 factory.DeleteFolder(folderName);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to DeleteFolder(). {0}", comEx.Message);
+                return false;
             }
         }
 
-        public void DeleteFile(string fileName)
+        public bool DeleteFile(string fileName)
         {
             try
             {
                 factory.DeleteFile(fileName);
+                return true;
             }
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to DeleteFile(). {0}", comEx.Message);
+                return false;
             }
         }
 
@@ -141,7 +155,7 @@ namespace Client
             }
             catch (CommunicationException comEx)
             {
-                Console.WriteLine("There is no server with that kind of binding mode");
+                Console.WriteLine("There is no server with that kind of binding mode eror: " + comEx.Message);
             }
         }
     }

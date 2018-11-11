@@ -17,7 +17,7 @@ namespace Service
         {
         }
 
-        public void CreateFile(string fileName)
+        public bool CreateFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
              if (principal.IsInRole("Read"))
@@ -25,20 +25,21 @@ namespace Service
                     File.Create(fileName);
                     Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name,"CreateFile()");
                     Console.WriteLine("File is created with name {0}", fileName);
-
+                    return true;
              }
              else
              {
                 SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFile()",se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
              }
             
         }
 
 
 
-        public void CreateFolder(string foldername)
+        public bool CreateFolder(string foldername)
         {
            
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -48,18 +49,19 @@ namespace Service
                 System.IO.Directory.CreateDirectory(foldername);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "CreateFolder()");
                 Console.WriteLine("Folder is created with name {0}", foldername);
+                return true;
             }
             else
             {
-                //loger
                 SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFolder()", se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
             }
           
         }
 
-        public void DeleteFile(string fileName)
+        public bool DeleteFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             
@@ -70,12 +72,14 @@ namespace Service
                     File.Delete(fileName);
                     Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()");
                     Console.WriteLine("File {0} is deleted.", fileName);
+                    return true;
                 }
                 else
                 {
                     SecurityException se = new SecurityException();
                     Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()", se.Message);
                     Console.WriteLine("This file not exist", se.Message);
+                    return false;
                 }
             }
             else
@@ -83,6 +87,7 @@ namespace Service
                 SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()", se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
 
             }
           
@@ -90,7 +95,7 @@ namespace Service
 
      
 
-        public void DeleteFolder(string folderName)
+        public bool DeleteFolder(string folderName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             
@@ -100,14 +105,16 @@ namespace Service
                  dir.Delete(true);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()");
                 Console.WriteLine("Folder {0} is deleted.", folderName);
+                return true;
              }
             Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()","File not exists");
+            return false;
 
 
 
         }
 
-        public void ModifyFile(string FileName)
+        public bool ModifyFile(string FileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
            
@@ -119,19 +126,21 @@ namespace Service
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()");
 
                 Console.WriteLine("File {0} is modified.", FileName);
+                return true;
             }
             else
             {
-                //loger
+                
                 SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
             }
          
         }
 
-        public void ModifyFolderName(string folderName,string newName)
+        public bool ModifyFolderName(string folderName,string newName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             
@@ -141,6 +150,7 @@ namespace Service
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFolderName()");
 
                 Console.WriteLine("Folder name {0} is changed to {1}.", folderName, newName);
+                return true;
             }
             else
             {
@@ -149,12 +159,13 @@ namespace Service
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "ModifyFolderName()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
 
             }
           
         }
 
-        public void Read(string fileName)
+        public bool Read(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
            
@@ -166,14 +177,15 @@ namespace Service
 
                 Console.WriteLine("Text from file {0}", fileName);
                Console.WriteLine(readText);
+                return true;
            }
            else
            {
-               //loger
                SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "Read()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
+                return false;
            }
          
         }

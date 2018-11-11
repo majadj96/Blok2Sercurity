@@ -10,6 +10,7 @@ using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Service
@@ -54,6 +55,11 @@ namespace Service
             string address = "net.tcp://"+ip+":50010/Sync";
 
             proxy = new RBACProxy(binding, address);
+            while (!proxy.isAlive())
+            {
+                Thread.Sleep(1000);
+                proxy = new RBACProxy(binding, address);
+            }
             InMemoryCash.GroupsAndPermissionsDictionary = proxy.SetDictionary();
 
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
@@ -77,10 +83,6 @@ namespace Service
             
             ServiceHost hostForRBAC = CreateHostForRBAC(port);
            
-
-            
-
-
             hostForRBAC.Open();
             hostProtection.Open(mode);
             
