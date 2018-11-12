@@ -15,12 +15,7 @@ namespace AutorizationManagerForRBAC
             UpdatePermissionsGroup();
         }
 
-        public List<string> GetPermissions(string group)
-        {
-            GroupsAndPermissionsDict.TryGetValue(group, out List<string> retList);
-            return retList;
-        }
-
+       
         public void UpdatePermissionsGroup()
         {
             GroupsAndPermissionsDict = new Dictionary<string, List<string>>();
