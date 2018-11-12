@@ -26,7 +26,7 @@ namespace Service
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
 
-            //ELENA 9.11.
+          
            
             
             string address = "net.tcp://localhost:" + port + "/UpdateConfig";
@@ -80,10 +80,10 @@ namespace Service
             }
 
             string port = proxy.GetPort(IP4Address);
-            
+            Console.WriteLine("PORT JE:"+port);
             ServiceHost hostForRBAC = CreateHostForRBAC(port);
            
-            hostForRBAC.Open();
+          //  hostForRBAC.Open();
             hostProtection.Open(mode);
             
             Console.ReadLine();

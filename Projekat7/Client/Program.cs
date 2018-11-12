@@ -18,6 +18,7 @@ namespace Client
                 proxy.CheckLevel();
 
                 int action;
+                string tekst;
                 bool result;
                 do
                 {
@@ -75,7 +76,7 @@ namespace Client
                         case 4:
                             Console.WriteLine("Molim vas upisete koji fajl zelite da izmenite:");
                             string fileNameM = Console.ReadLine();
-                            Console.WriteLine("Molim vas upisete tekst u fajl");
+                            Console.WriteLine("Molim vas upisete novi naziv fajla");
                             string text = Console.ReadLine();
 
                             result = proxy.ModifyFile(fileNameM, text);
@@ -87,9 +88,12 @@ namespace Client
                         case 5:
                             Console.WriteLine("Molim vas upisete ime fajla koji zelite da procitate:");
                             string fileName2 = Console.ReadLine();
-                            result = proxy.Read(fileName2);
-                            if (result)
+                            tekst = proxy.Read(fileName2);
+                            if (tekst != "")
+                            {
                                 Console.WriteLine("Fajl uspesno procitan.");
+                                Console.WriteLine(tekst);
+                            }
                             else
                                 Console.WriteLine("Fajl nije procitan.");
                             break;

@@ -99,7 +99,7 @@ namespace Client
             }
         }
 
-        public bool Read(string FileName)
+        public string Read(string FileName)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Client
             catch (CommunicationException comEx)
             {
                 Console.WriteLine("Error while trying to Read(). {0}", comEx.Message);
-                return false;
+                return "";
             }
         }
 

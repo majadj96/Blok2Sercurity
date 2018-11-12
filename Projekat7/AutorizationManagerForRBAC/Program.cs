@@ -47,10 +47,7 @@ namespace AutorizationManagerForRBAC
 
             X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, srvCertCN);
 
-            if (srvCert == null)
-                Console.WriteLine("NULL");
-            else
-                Console.WriteLine("NIJE NULL");
+           
             EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://" + add1 + ":50002/Log"), new X509CertificateEndpointIdentity(srvCert));
             //EndpointAddress address1 = new EndpointAddress(new Uri("net.tcp://localhost:50002/Log"), new X509CertificateEndpointIdentity(srvCert));
 

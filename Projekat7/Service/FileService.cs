@@ -22,9 +22,10 @@ namespace Service
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             if (principal.IsInRole("Read"))
             {
-                File.Create(fileName);
+                var file =  File.Create(fileName);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "CreateFile()");
                 Console.WriteLine("File is created with name {0}", fileName);
+                file.Close();
                 return true;
             }
             else
@@ -135,8 +136,7 @@ namespace Service
 
             if (principal.IsInRole("Edit"))
             {
-                Console.WriteLine("Modify file:");
-                File.AppendAllText(FileName, text);
+                File.Move(FileName, text);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()");
 
                 Console.WriteLine("File {0} is modified.", FileName);
@@ -179,7 +179,7 @@ namespace Service
 
         }
 
-        public bool Read(string fileName)
+        public string Read(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
@@ -189,9 +189,9 @@ namespace Service
                 string readText = File.ReadAllText(fileName);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "Read()");
 
-                Console.WriteLine("Text from file {0}", fileName);
-                Console.WriteLine(readText);
-                return true;
+               // Console.WriteLine("Text from file {0}", fileName);
+               // Console.WriteLine(readText);
+                return "Text form file "+fileName+": "+readText;
             }
             else
             {
@@ -199,7 +199,7 @@ namespace Service
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "Read()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
-                return false;
+                return "";
             }
 
         }

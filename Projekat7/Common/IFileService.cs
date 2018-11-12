@@ -26,7 +26,7 @@ namespace Common
         bool ModifyFile(string FileName, string text);
 
         [OperationContract]
-        bool Read(string FileName);
+        string Read(string FileName);
 
         [OperationContract]
         bool DeleteFolder(string folderName);
