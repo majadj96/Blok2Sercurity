@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     [ServiceContract]
-   public interface IFileService
+    public interface IFileService
     {
         [OperationContract]
         void CheckLevel();
@@ -23,7 +23,7 @@ namespace Common
         bool ModifyFolderName(string folderName, string newName);
 
         [OperationContract]
-        bool ModifyFile(string FileName);
+        bool ModifyFile(string FileName, string text);
 
         [OperationContract]
         bool Read(string FileName);

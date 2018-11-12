@@ -42,7 +42,7 @@ namespace AutorizationManagerForRBAC
 
         public bool isAlive()
         {
-            Console.WriteLine("RBAC is alive");
+            //Console.WriteLine("RBAC is alive");
             return true;
         }
     }

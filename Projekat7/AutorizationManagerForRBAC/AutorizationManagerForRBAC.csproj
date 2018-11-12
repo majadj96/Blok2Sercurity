@@ -52,7 +52,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="GroupsAndPermissions.cs" />
     <Compile Include="MakeRBACClient.cs" />
     <Compile Include="MakeSyslogClient.cs" />
     <Compile Include="Program.cs" />

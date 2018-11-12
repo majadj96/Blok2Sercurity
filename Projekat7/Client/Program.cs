@@ -46,7 +46,7 @@ namespace Client
                                 Console.WriteLine("Folder uspesno kreiran.");
                             else
                                 Console.WriteLine("Folder nije kreiran.");
-                            
+
                             break;
 
                         case 2:
@@ -64,7 +64,7 @@ namespace Client
                             string oldName = Console.ReadLine();
                             Console.WriteLine("Molim vas upisete zeljeno ime za folder:");
                             string newName = Console.ReadLine();
-                            result = proxy.ModifyFolderName(oldName,newName);
+                            result = proxy.ModifyFolderName(oldName, newName);
                             if (result)
                                 Console.WriteLine("Folder uspesno izmenjen.");
                             else
@@ -75,7 +75,10 @@ namespace Client
                         case 4:
                             Console.WriteLine("Molim vas upisete koji fajl zelite da izmenite:");
                             string fileNameM = Console.ReadLine();
-                            result = proxy.ModifyFile(fileNameM);
+                            Console.WriteLine("Molim vas upisete tekst u fajl");
+                            string text = Console.ReadLine();
+
+                            result = proxy.ModifyFile(fileNameM, text);
                             if (result)
                                 Console.WriteLine("Fajl uspesno izmenjen.");
                             else
@@ -84,7 +87,7 @@ namespace Client
                         case 5:
                             Console.WriteLine("Molim vas upisete ime fajla koji zelite da procitate:");
                             string fileName2 = Console.ReadLine();
-                            result =  proxy.Read(fileName2);
+                            result = proxy.Read(fileName2);
                             if (result)
                                 Console.WriteLine("Fajl uspesno procitan.");
                             else
@@ -110,7 +113,7 @@ namespace Client
                             break;
 
                     }
-
+                    result = false;
                 } while (action != 0);
 
 

@@ -20,30 +20,30 @@ namespace Service
         public bool CreateFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-             if (principal.IsInRole("Read"))
-             {
-                    File.Create(fileName);
-                    Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name,"CreateFile()");
-                    Console.WriteLine("File is created with name {0}", fileName);
-                    return true;
-             }
-             else
-             {
+            if (principal.IsInRole("Read"))
+            {
+                File.Create(fileName);
+                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "CreateFile()");
+                Console.WriteLine("File is created with name {0}", fileName);
+                return true;
+            }
+            else
+            {
                 SecurityException se = new SecurityException();
-                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFile()",se.Message);
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "CreateFile()", se.Message);
                 Console.WriteLine("This user dont have permission", se.Message);
                 return false;
-             }
-            
+            }
+
         }
 
 
 
         public bool CreateFolder(string foldername)
         {
-           
+
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            
+
             if (principal.IsInRole("Administrate"))
             {
                 System.IO.Directory.CreateDirectory(foldername);
@@ -58,13 +58,13 @@ namespace Service
                 Console.WriteLine("This user dont have permission", se.Message);
                 return false;
             }
-          
+
         }
 
         public bool DeleteFile(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            
+
             if (principal.IsInRole("Administrate"))
             {
                 if (File.Exists(fileName))
@@ -90,39 +90,53 @@ namespace Service
                 return false;
 
             }
-          
+
         }
 
-     
+
 
         public bool DeleteFolder(string folderName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            
-             var dir = new DirectoryInfo(folderName);
-             if (dir != null)
-             {
-                 dir.Delete(true);
-                Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()");
-                Console.WriteLine("Folder {0} is deleted.", folderName);
-                return true;
-             }
-            Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFile()","File not exists");
-            return false;
+            if (principal.IsInRole("Administrate"))
+            {
+                var dir = new DirectoryInfo(folderName);
+                if (dir != null)
+                {
+                    dir.Delete(true);
+                    Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()");
+                    Console.WriteLine("Folder {0} is deleted.", folderName);
+                    return true;
+                }
+                else
+                {
+                    Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()", "File not exists");
+                    return false;
+                }
+
+            }
+            else
+            {
+                SecurityException se = new SecurityException();
+                Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "DeleteFolder()", se.Message);
+                Console.WriteLine("This user dont have permission");
+                return false;
+
+            }
+
 
 
 
         }
 
-        public bool ModifyFile(string FileName)
+        public bool ModifyFile(string FileName, string text)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-           
+
             if (principal.IsInRole("Edit"))
             {
                 Console.WriteLine("Modify file:");
-                string tekst = Console.ReadLine();
-                File.AppendAllText(FileName, tekst);
+                File.AppendAllText(FileName, text);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()");
 
                 Console.WriteLine("File {0} is modified.", FileName);
@@ -130,20 +144,20 @@ namespace Service
             }
             else
             {
-                
+
                 SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "ModifyFile()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
                 return false;
             }
-         
+
         }
 
-        public bool ModifyFolderName(string folderName,string newName)
+        public bool ModifyFolderName(string folderName, string newName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            
+
             if (principal.IsInRole("Edit"))
             {
                 Directory.Move(folderName, newName);
@@ -162,32 +176,32 @@ namespace Service
                 return false;
 
             }
-          
+
         }
 
         public bool Read(string fileName)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-           
-           if (principal.IsInRole("Read"))
-           {
 
-               string readText = File.ReadAllText(fileName);
+            if (principal.IsInRole("Read"))
+            {
+
+                string readText = File.ReadAllText(fileName);
                 Audit.LoggingSuccess(Thread.CurrentPrincipal.Identity.Name, "Read()");
 
                 Console.WriteLine("Text from file {0}", fileName);
-               Console.WriteLine(readText);
+                Console.WriteLine(readText);
                 return true;
-           }
-           else
-           {
-               SecurityException se = new SecurityException();
+            }
+            else
+            {
+                SecurityException se = new SecurityException();
                 Audit.LoggingFail(Thread.CurrentPrincipal.Identity.Name, "Read()", se.Message);
 
                 Console.WriteLine("This user dont have permission", se.Message);
                 return false;
-           }
-         
+            }
+
         }
     }
 }

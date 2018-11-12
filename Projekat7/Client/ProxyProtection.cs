@@ -12,21 +12,21 @@ namespace Client
     public class ProxyProtection : ChannelFactory<IFileService>, IFileService, IDisposable
     {
         IFileService factory;
-        
+
 
         public ProxyProtection()
         {
             NetTcpBinding binding = new NetTcpBinding();
-            
+
             Console.WriteLine("Unesite ipadresu za KanalKaServisu:");
             string add = Console.ReadLine();
             Console.WriteLine("Unesite port za KanalKaServisu:");
             string port = Console.ReadLine();
-            
+
             string address = "net.tcp://" + add + ":" + port + "/FileService";
 
             ChannelFactory<IFileService> channelFactory = new ChannelFactory<IFileService>(binding, address);
-           
+
             Console.WriteLine("Choose 't' for Transport Mode or 'm' for Message Mode..");
             string forSend = Console.ReadLine();
 
@@ -43,7 +43,7 @@ namespace Client
                 binding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
 
             }
-   
+
             factory = channelFactory.CreateChannel();
         }
 
@@ -51,8 +51,7 @@ namespace Client
         {
             try
             {
-                factory.CreateFolder(foldername);
-                return true;
+                return factory.CreateFolder(foldername);
             }
             catch (CommunicationException comEx)
             {
@@ -65,8 +64,7 @@ namespace Client
         {
             try
             {
-                factory.CreateFile(filename);
-                return true;
+                return factory.CreateFile(filename);
             }
             catch (CommunicationException comEx)
             {
@@ -79,8 +77,7 @@ namespace Client
         {
             try
             {
-                factory.ModifyFolderName(folderName,newName);
-                return true;
+                return factory.ModifyFolderName(folderName, newName);
             }
             catch (CommunicationException comEx)
             {
@@ -89,12 +86,11 @@ namespace Client
             }
         }
 
-        public bool ModifyFile(string FileName)
+        public bool ModifyFile(string FileName, string text)
         {
             try
             {
-                factory.ModifyFile(FileName);
-                return true;
+                return factory.ModifyFile(FileName, text);
             }
             catch (CommunicationException comEx)
             {
@@ -107,8 +103,7 @@ namespace Client
         {
             try
             {
-                factory.Read(FileName);
-                return true;
+                return factory.Read(FileName);
             }
             catch (CommunicationException comEx)
             {
@@ -121,8 +116,7 @@ namespace Client
         {
             try
             {
-                factory.DeleteFolder(folderName);
-                return true;
+                return factory.DeleteFolder(folderName);
             }
             catch (CommunicationException comEx)
             {
@@ -135,8 +129,7 @@ namespace Client
         {
             try
             {
-                factory.DeleteFile(fileName);
-                return true;
+                return factory.DeleteFile(fileName);
             }
             catch (CommunicationException comEx)
             {
